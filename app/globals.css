@@ -1,0 +1,491 @@
+@import "tailwindcss";
+
+:root {
+  /* [1] 전역 컬러 변수 */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray-sub: #999999;
+  --color-border: #EEEEEE;
+  --color-qwer-chodan: #FFFFFF;
+  --color-qwer-magenta: #ff4edb;
+  --color-qwer-hina: #00a8ff;
+  --color-qwer-siyeon: #00c853;
+
+  /* [2] 공통 수치 변수 */
+  --radius-base: 8px;
+  --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --color-txt-sub: var(--color-gray-sub);
+  --color-border-light: var(--color-border);
+  --color-gray-sub: var(--color-gray-sub);
+  --font-main: "Pretendard", sans-serif;
+  --color-qwer-chodan: var(--color-qwer-chodan);
+  --color-qwer-magenta: var(--color-qwer-magenta);
+  --color-qwer-hina: var(--color-qwer-hina);
+  --color-qwer-siyeon: var(--color-qwer-siyeon);
+  
+  /* Typography System: Tailwind v4 유틸리티 자동 생성 */
+  --text-h1: 40px;
+  --text-h1--line-height: 50px;
+  --text-h1--font-weight: 800;
+
+  --text-h2: 24px;
+  --text-h2--line-height: 40px;
+  --text-h2--font-weight: 700;
+  
+  --text-h3: 20px;
+  --text-h3--line-height: 30px;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 16px;
+  --text-h4--line-height: 25px;
+  --text-h4--font-weight: 500;
+
+  --text-h5: 14px;
+  --text-h5--line-height: 20px;
+  --text-h5--font-weight: 400;
+
+  --text-h6: 12px;
+  --text-h6--line-height: 20px;
+  --text-h6--font-weight: 300;
+
+  /* Radius & Transition */
+  --radius-base: var(--radius-base);
+  --transition-base: var(--transition-base);
+}
+
+@layer base {
+  body { 
+    font-family: var(--font-main); 
+    @apply m-0 p-0;
+    -webkit-tap-highlight-color: transparent; 
+  }
+
+  h1 { @apply text-h1; }
+  h2 { @apply text-h2; }
+  h3 { @apply text-h3; }
+  h4 { @apply text-h4; }
+  h5 { @apply text-h5; }
+  h6 { @apply text-h6; }
+
+  a { @apply no-underline text-inherit; }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-thumb { @apply bg-[#333] rounded-full; }
+}
+
+@layer components {
+  /* ============================================================
+     [1] HEADER SYSTEM
+  ============================================================ */
+  .header-wrapper {
+    @apply w-full bg-black text-white sticky top-0 z-50 flex items-center justify-between;
+    @apply p-[20px_35px] lg:p-[30px_140px];
+  }
+
+  .header-logo {
+    @apply relative flex items-center justify-center cursor-pointer overflow-hidden;
+    @apply w-[30px] h-[30px] lg:w-[60px] lg:h-[60px];
+    img { @apply w-full h-full object-contain; }
+  }
+
+  .icon-hamburger, .icon-arrow { @apply w-[30px] h-[30px] cursor-pointer flex items-center justify-center; }
+  
+  .header-pc-menu { 
+    @apply flex flex-row items-center gap-[60px];
+
+    a {
+       @apply text-h2 text-white px-[5px] py-[5px]; 
+      }
+  }
+
+  .header-pc-right { @apply hidden lg:flex items-center justify-end min-w-[140px]; }
+  
+  .header-mobile-menu { 
+    @apply text-h3 flex lg:hidden absolute left-1/2 -translate-x-1/2; 
+  }
+
+  .mobile-menu-overlay {
+    @apply fixed inset-0 z-100 bg-black text-white flex flex-col overflow-y-auto pb-[80px] px-[35px];
+  }
+
+  .menu-header {
+    @apply relative flex items-center justify-end w-full py-[20px];
+
+    .menu-title { 
+      @apply text-h3 absolute left-1/2 -translate-x-1/2; 
+    }
+    .icon-close { 
+      @apply w-[30px] h-[30px] flex items-center justify-center cursor-pointer; 
+    }
+  }
+
+  .menu-guide-box {
+    @apply py-[40px] flex flex-col gap-[20px];
+
+    .guide-text {
+       @apply text-h3 leading-relaxed text-center; 
+      }
+    .login-btn { 
+      @apply w-full; 
+    }
+  }
+
+  .menu-list-wrapper {
+    @apply flex flex-col w-full gap-y-[20px];
+
+    a { 
+      @apply text-h2 block py-[5px] text-white text-center; 
+    }
+  }
+
+  /* ============================================================
+     [2] USER INFO & PROFILE SYSTEM
+  ============================================================ */
+  .user-info-comp { @apply flex items-center justify-center; }
+  .user-type-row { @apply flex-row; }
+  .user-type-col { @apply flex-col text-center; }
+
+  .user-info-comp {
+    & .profile-img-wrapper { @apply relative inline-block shrink-0; }
+    & .profile-img { @apply rounded-full object-cover border border-gray-100 w-full h-full; }
+    & .nickname { @apply font-bold text-black; }
+  }
+
+  .header-wrapper .user-info-comp .nickname,
+  .mobile-menu-overlay .user-info-comp .nickname { @apply text-white; }
+
+  .user-size-comment { @apply gap-[10px]; & .profile-img-wrapper { @apply w-[30px] h-[30px]; } & .nickname { @apply text-h5; } }
+  .user-size-header { @apply gap-[10px]; & .profile-img-wrapper { @apply w-[40px] h-[40px]; } & .nickname { @apply text-h3; } }
+  .user-size-mypage-pc { @apply gap-[20px]; & .profile-img-wrapper { @apply w-[80px] h-[80px]; } & .nickname { @apply text-h3; } }
+  .user-size-mypage-mo { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[60px] h-[60px]; } & .nickname { @apply text-h4; } }
+  .user-size-mypage { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[100px] h-[100px]; } & .nickname { @apply text-h2; } }
+
+  .camera-badge {
+    @apply absolute bottom-0 right-0 bg-white rounded-full flex items-center justify-center shadow-md border border-gray-200 cursor-pointer;
+    background: url("data:image/svg+xml,...") no-repeat center;
+  }
+  .pc-camera { @apply w-[40px] h-[40px]; background-size: 20px; }
+  .mo-camera { @apply w-[30px] h-[30px]; background-size: 15px; }
+
+  /* 1. PC 레이아웃 (가로 4열 배열) */
+  .pc-infobox { 
+    /* 4개의 아이템이 가로로 나란히 배치되도록 grid 사용 */
+    @apply grid grid-cols-4 gap-[20px] w-full; 
+
+    .pc-infoitem {
+      /* 라벨과 데이터를 위아래로 배치 */
+      @apply flex flex-col items-start w-full gap-[10px]; 
+
+      .infolabel {
+        @apply text-h5 text-black/40 font-medium; /* 라벨은 작고 흐리게 */
+      }
+      .infodata {
+        @apply text-h4 text-black font-bold; /* 데이터는 크고 진하게 */
+      }
+    }
+  }
+
+  /* 2. 모바일 레이아웃 (2x2 그리드 배열) */
+  .mo-infobox { 
+    /* 2열 2행 구조 */
+    @apply grid grid-cols-2 gap-[20px] w-full; 
+
+    .mo-infoitem {
+      /* 라벨과 데이터를 위아래로 배치 */
+      @apply flex flex-col items-start w-full gap-[5px]; 
+
+      .infolabel {
+        @apply text-h6 text-black/40 font-medium;
+      }
+      .infodata {
+        @apply text-h5 text-black font-bold;
+      }
+    }
+  }
+
+  /* ============================================================
+     [3] FOOTER SYSTEM
+  ============================================================ */
+  .footer-wrapper {
+    @apply w-full bg-black text-white flex flex-col p-[20px_35px] z-50 lg:p-[40px_140px];
+
+    .footer-container {
+       @apply flex flex-col lg:flex-row lg:justify-between lg:items-start mb-[15px] lg:mb-[20px] w-full; 
+    }
+
+    .footer-divider { 
+      @apply w-full h-px bg-white opacity-10 mb-[15px] lg:mb-[20px]; 
+    }
+
+    .footer-copyright { 
+      @apply text-h5 text-left; 
+    }
+  }
+  
+  .footer-left-group {
+    @apply flex flex-col items-start w-full lg:w-auto gap-[15px] lg:gap-[20px];
+
+    .footer-content {
+      @apply flex items-center justify-start gap-[60px] w-fit;
+
+      .content-text { 
+        @apply text-h3 lg:text-h2 whitespace-nowrap leading-relaxed; 
+      }
+      /* 푸터 내부의 셀렉트 박스 전용 스타일 */
+      .footer-select-box {
+        .select-base {
+          /* 배경은 흰색, 글자는 검정색으로 강제 적용 */
+          @apply bg-white text-black border-black;
+          
+          /* 브라우저 기본 스타일 제거 (커스텀 화살표 사용을 위해) */
+          @apply appearance-none;
+      
+          /* 옵션 리스트도 흰색 배경에 검정 텍스트 유지 */
+          option {
+            @apply bg-white text-black;
+          }
+      
+          /* 화살표 아이콘을 검정색으로 변경 */
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+          background-repeat: no-repeat;
+          background-position: right 10px center;
+          background-size: 14px;
+        }
+      }
+    }
+
+    .footer-sns-list { 
+      @apply flex items-center gap-[15px] lg:gap-[30px]; 
+
+      .sns-icon { 
+        @apply w-[25px] h-[25px] lg:w-[40px] lg:h-[40px] flex items-center justify-center cursor-pointer; 
+        img, svg { @apply w-full h-full object-contain; } 
+      }
+    }
+  }
+  
+  .footer-right-group {
+    @apply mt-[40px] lg:mt-0 flex flex-col gap-[15px] lg:gap-[25px] w-full lg:w-auto;
+
+    .footer-menu-list {
+      @apply flex items-center justify-between w-full lg:justify-start lg:w-auto;
+
+      .menu-text-group {
+         @apply text-h4 flex items-center gap-[20px]; 
+        }
+      .icon-arrow {
+         @apply flex lg:hidden w-[25px] h-[25px] items-center justify-center cursor-pointer; 
+        }
+    }
+
+    .footer-info-list {
+      /* [1] 공통 스타일 */
+      @apply opacity-60 text-h5 w-full lg:w-fit;
+      
+      /* [2] 모바일: 세로 배열 및 간격 */
+      @apply flex flex-col gap-[5px];
+    
+      /* [3] PC: 그리드 배열 및 간격 (가로 60px, 세로 10px) */
+      @apply lg:grid lg:grid-cols-2 lg:gap-x-[60px] lg:gap-y-[10px];
+    
+      /* MUI Collapse 사용 시 내부 컨테이너에도 동일 레이아웃 적용 */
+      & .MuiCollapse-wrapperInner {
+        @apply flex flex-col gap-[5px] lg:grid lg:grid-cols-2 lg:gap-x-[60px] lg:gap-y-[10px];
+      }
+    
+      .info-item {
+        @apply whitespace-nowrap block;
+      }
+    }
+  }
+
+  /* ============================================================
+     [4] UI COMPONENTS
+  ============================================================ */
+  .btn-base { 
+    @apply inline-flex items-center justify-center cursor-pointer outline-none rounded-base;
+    transition: var(--transition-base); 
+  }
+
+  .btn-lg { @apply text-h4 h-[50px] px-6; }
+  .btn-md { @apply text-h5 h-[40px] px-4; }
+  .btn-sm { @apply text-h6 h-[30px] px-3; }
+  .btn-blue { @apply bg-qwer-hina text-white border-none hover:brightness-110; }
+  .btn-black { @apply bg-white text-black border border-black hover:bg-gray-50; }
+
+  .input-base, .select-base {
+    @apply flex items-center px-4 outline-none w-full border border-transparent bg-white text-black rounded-base;
+    transition: var(--transition-base);
+  }
+  .input-pc, .select-pc { @apply text-h5 h-[40px]; }
+  .input-mo, .select-mo { @apply text-h6 h-[30px]; }
+  .input-style, .select-style { @apply border-black focus:border-qwer-hina focus:ring-1 focus:ring-qwer-hina; }
+
+  .select-base {
+    @apply appearance-none cursor-pointer pr-10;
+    background: url("data:image/svg+xml,...") no-repeat right 10px center / 20px;
+    option { @apply bg-white text-black; }
+  }
+  .input-search { @apply pl-10; background: url("data:image/svg+xml,...") no-repeat left 10px center / 20px; }
+
+  .tab-base { @apply inline-flex items-center justify-center cursor-pointer outline-none rounded-base transition-(--transition-base); }
+  .tab-line-active { @apply text-black font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-black after:content-['']; }
+  .card-list, .noti-card { @apply flex flex-col w-full bg-white text-black border border-black p-5 gap-[10px] rounded-base transition-(--transition-base); }
+
+  .tag-author-base { @apply text-h6 inline-flex items-center justify-center text-white px-2 rounded-[4px] h-[20px] leading-none; }
+  .tag-author-comment { @apply bg-qwer-siyeon; }
+  .tag-author-reply { @apply bg-qwer-hina; }
+
+  .btn-social { 
+    @apply w-full flex items-center justify-center gap-[15px] rounded-[8px] font-bold h-[50px] max-w-[480px] transition-all; 
+  }
+  .btn-naver { 
+    @apply bg-[#03C75A] text-white hover:bg-[#02b351]; 
+  }
+  .btn-kakao { 
+    @apply bg-[#FEE500] text-[#191919] hover:bg-[#fada00]; 
+  }
+  .btn-google { 
+    @apply bg-[#F2F2F2] text-black border border-[#DDDDDD] hover:bg-[#EAEAEA]; 
+  }
+  
+  .alert-overlay { @apply fixed inset-0 z-200 flex items-center justify-center bg-black/60; }
+  .alert-box { @apply bg-white border border-black rounded-[8px] flex flex-col items-center min-w-[320px] p-[10px] lg:p-[20px]; }
+
+  .more-menu {
+    @apply absolute top-[calc(100%+12px)] right-0 border border-(--color-gray-sub)/20 rounded-[4px] min-w-[100px] z-100 py-[10px] px-[5px] gap-[5px];
+    @apply bg-white;
+
+    .menu-item {      
+      @apply text-h5 w-full flex items-center text-black cursor-pointer whitespace-nowrap p-[10px];
+      &.logout { @apply text-red-500; }
+    }
+  }
+
+  /* [공통] 서브 페이지 기본 레이아웃 엔진 */
+  .sub-page-layout {
+    @apply w-full min-h-screen bg-white text-black max-w-[1920px] flex flex-col;
+    
+    /* --- 1. 컨텐츠 영역 (PC/모바일 공통 클래스) --- */
+    .pc-content {
+      /* PC 공통: 상하 80px, 좌측 260px 고정 */
+      @apply hidden lg:flex flex-row w-full flex-1 pt-[80px] pb-[80px] pl-[260px] bg-white;
+    }
+
+    .mo-content {
+      /* 모바일 공통: 상하 40px, 좌우 35px 고정 */
+      @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-white;
+    }
+
+    /* --- 2. 타입별 우측 여백 및 사이드바 제어 (PC) --- */
+    
+    /* CASE A: No Title (로그인, 약관 등) */
+    &.layout-no-title {
+      .pc-content {
+        @apply pr-[260px]; /* 좌우 대칭 260px */
+      }
+    }
+
+    /* CASE B: Side Layout (마이페이지 등) */
+    &.layout-side {
+      @apply lg:flex-row lg:items-stretch;
+
+      .pc-content {
+        /* 컨텐츠 우측은 사이드바와의 간격 90px만 유지 */
+        /* (전체 구조상 우측 끝에서 260px 지점에 컨텐츠가 끝남) */
+        @apply pr-[90px]; 
+      }
+
+      .title-type-side {
+        /* 우측 끝에서 140px 지점에 고정 (너비 30px) */
+        @apply hidden lg:flex flex-col items-center justify-center shrink-0 w-[30px] h-screen sticky top-0 order-2 mr-[140px] gap-[20px];
+
+        .num { @apply text-h3 font-bold; }
+        .line { @apply w-px h-[180px] bg-black opacity-30; }
+        .text { 
+          @apply text-h3 font-bold text-center uppercase tracking-widest;
+          writing-mode: vertical-rl;
+        }
+      }
+    }
+  }
+
+  /* --- 3. 마이페이지 내부 LNB 및 컨텐츠 세부 스타일 --- */
+  .lnb-wrapper {
+    @apply flex flex-col w-[200px] shrink-0 border rounded-[12px] border-black p-[40px] gap-[20px];
+  }
+
+  .lnb-menu-list {
+    @apply flex flex-col w-full;
+  }
+  
+  .lnb-item {
+    @apply flex items-center justify-between py-[10px] cursor-pointer transition-all;
+    
+    span { @apply text-h4 font-medium text-black/60; }
+    &.active span { @apply text-black font-bold; }
+    
+    .icon-arrow { @apply w-[20px] h-[20px] opacity-20; }
+    &.active .icon-arrow { @apply opacity-100; }
+  }
+  
+  .lnb-footer {
+    @apply flex flex-col gap-[20px];
+  }
+
+  .mypage-content-area {
+    /* LNB와 컨텐츠 사이 간격 80px */
+    @apply flex-1 ml-[80px];
+    
+    .content-title {
+      @apply text-h3 font-bold text-black border-b border-black pb-[20px] mb-[40px];
+    }
+  }
+
+  .mo-content-footer {
+    @apply flex flex-row pt-[20px] gap-[10px] border-t border-black;
+  }
+
+  /* [공통] MUI Checkbox 커스텀 스타일 */
+  .custom-checkbox {
+    @apply p-0;
+    
+    .MuiSvgIcon-root {
+      /* 박스 크기 및 테두리 설정 */
+      @apply w-[25px] h-[25px] rounded-[4px] bg-white border border-black transition-all;
+      color: transparent; 
+    }
+
+    &.Mui-checked { 
+      .MuiSvgIcon-root {
+        @apply bg-white border-black; 
+        color: var(--color-qwer-hina); 
+        transform: scale(1.5); 
+      }
+    }
+    
+    /* 터치 시 나오는 회색 원형 배경(Ripple) 제거 */
+    &:hover { @apply bg-transparent; }
+  }  
+
+  /* MUI Pagination 커스텀 스타일 */
+  .MuiPagination-root .MuiPaginationItem-root {
+    border-radius: 0px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    font-family: inherit;
+  }
+
+  .MuiPagination-root .MuiPaginationItem-root.Mui-selected {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+
+  .MuiPagination-root .MuiPaginationItem-root.Mui-selected:hover {
+    background-color: #333 !important;
+  }
+}
