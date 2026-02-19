@@ -43,7 +43,7 @@ export default function MyPostsSection({ device }: MyPostsSectionProps) {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-x-[20px] gap-y-[40px] mb-[60px]">
+        <div className="flex flex-col gap-[20px] mb-[40px]">
           {Array.from({ length: 10 }).map((_, i) => (
             <Card
               key={i}
@@ -100,7 +100,7 @@ export default function MyPostsSection({ device }: MyPostsSectionProps) {
           ))}
         </div>
 
-        <div className="flex justify-center mt-6 mb-[60px]">
+        <div className="flex justify-center mt-[20px] mb-[60px]">
           <MuiPagination 
             count={10} 
             page={currentPage} 

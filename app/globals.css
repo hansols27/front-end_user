@@ -398,7 +398,7 @@
       .pc-content {
         /* 컨텐츠 우측은 사이드바와의 간격 90px만 유지 */
         /* (전체 구조상 우측 끝에서 260px 지점에 컨텐츠가 끝남) */
-        @apply pr-[90px]; 
+        @apply pr-[220px]; 
       }
 
       .title-type-side {

@@ -45,7 +45,7 @@ export default function MyCommentsSection({ device }: MyCommentsSectionProps) {
         </div>
 
         {/* 댓글 리스트 (PC) */}
-        <div className="grid grid-cols-2 gap-x-[20px] gap-y-[40px] mb-[60px]">
+        <div className="flex flex-col gap-[20px] mb-[40px]">
           {Array.from({ length: 10 }).map((_, i) => (
             <Card
               key={i}
@@ -98,7 +98,7 @@ export default function MyCommentsSection({ device }: MyCommentsSectionProps) {
           ))}
         </div>
 
-        <div className="flex justify-center mt-6 mb-[60px]">
+        <div className="flex justify-center mt-[20px] mb-[60px]">
           <MuiPagination count={5} page={currentPage} onChange={handlePageChange} size="medium" />
         </div>
       </div>
