@@ -27,7 +27,7 @@ interface TabProps {
       <button
         type="button"
         onClick={onClick}
-        className={`${variantClass} ${sizeClass} ${className}`}
+        className={`tab-base ${variantClass} ${sizeClass} ${className}`}
       >
         {label}
       </button>

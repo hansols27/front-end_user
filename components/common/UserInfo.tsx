@@ -1,3 +1,5 @@
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+
 interface UserInfoProps {
   type?: 'row' | 'col';
   size: 'comment' | 'header' | 'mypage-pc' | 'mypage-mo' | 'mypage'; 
@@ -34,6 +36,7 @@ export default function UserInfo({
         {/* 수정 모드일 때만 카메라 아이콘 생성 */}
         {isEdit && (
           <label className={`camera-badge ${cameraClass}`}>
+            <PhotoCameraIcon className="camera-icon" />
             <input type="file" className="hidden" accept="image/*" />
           </label>
         )}

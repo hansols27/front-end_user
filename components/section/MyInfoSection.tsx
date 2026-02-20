@@ -4,15 +4,17 @@ import { useState } from 'react';
 import UserInfo from '@/components/common/UserInfo';
 import Button from '../common/Button';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useDevice } from '@/hooks/useDevice';
 
 interface MyInfoSectionProps {
   user: any;
-  device: "pc" | "mo";
 }
 
-export default function MyInfoSection({ user, device }: MyInfoSectionProps) {
-  const [isEditMode, setIsEditMode] = useState(false);
+export default function MyInfoSection({ user }: MyInfoSectionProps) {
+  const device = useDevice();
   const [tempNickname, setTempNickname] = useState(user?.nickname || "Guest");
+
+  if (!device) return null;
 
   // --- [PC 버전 전용 리턴] ---
   if (device === "pc") {
@@ -26,29 +28,25 @@ export default function MyInfoSection({ user, device }: MyInfoSectionProps) {
             <UserInfo
               type="row"
               size="mypage-pc"
-              nickname={!isEditMode ? tempNickname : ""}
+              nickname=""
               profileSrc={user?.profileImage}
               isEdit={true} 
             />
 
             {/* 수정 모드일 때 나타나는 입력 필드와 버튼을 가로로 묶음 */}
             <div className="flex flex-row items-center gap-[10px]">
-              {isEditMode && (
-                <input
-                  type="text"
-                  value={tempNickname}
-                  onChange={(e) => setTempNickname(e.target.value)}
-                  className="bg-transparent border-b border-black outline-none text-h3 font-bold pb-1 w-[140px]"
-                  autoFocus
-                />
-              )}
+              <input
+                type="text"
+                value={tempNickname}
+                onChange={(e) => setTempNickname(e.target.value)}
+                className="bg-transparent border-b border-black outline-none text-h3 font-bold pb-1 w-[140px]"
+              />
               <Button 
                 variant="black" 
                 size="sm" 
-                className="w-[80px]"
-                onClick={() => setIsEditMode(!isEditMode)}
+                className="w-[80px]"                
               >
-                {isEditMode ? "저장" : "수정"}
+                저장
               </Button>
             </div>
           </div>
@@ -74,8 +72,8 @@ export default function MyInfoSection({ user, device }: MyInfoSectionProps) {
             <span className="infodata">{user?.email || "example@email.com"}</span>
           </div>
           <div className="pc-infoitem">
-            <span className="infolabel">닉네임</span>
-            <span className="infodata">{user?.nickname || "히나"}</span>
+            <span className="infolabel">휴대폰번호</span>
+            <span className="infodata">{user?.phoneNumber || "010-1234-5678"}</span>
           </div>
           <div className="pc-infoitem">
             <span className="infolabel">가입일</span>
@@ -96,27 +94,25 @@ export default function MyInfoSection({ user, device }: MyInfoSectionProps) {
             <UserInfo
               type="row"
               size="mypage-mo"
-              nickname={!isEditMode ? tempNickname : ""}
+              nickname=""
               profileSrc={user?.profileImage}
               isEdit={true}
             />
             <div className="flex flex-row items-center gap-[10px]">
-              {isEditMode && (
-                <input
-                  type="text"
-                  value={tempNickname}
-                  onChange={(e) => setTempNickname(e.target.value)}
-                  className="bg-transparent border-b border-black outline-none text-h5 font-bold w-[100px]"
-                  autoFocus
-                />
-              )}
+              <input
+                type="text"
+                value={tempNickname}
+                onChange={(e) => setTempNickname(e.target.value)}
+                className="bg-transparent border-b border-black outline-none text-h5 font-bold w-[100px]"
+                autoFocus
+              />
+              
               <Button 
                 variant="black" 
                 size="sm" 
                 className="w-[60px]"
-                onClick={() => setIsEditMode(!isEditMode)}
               >
-                {isEditMode ? "저장" : "수정"}
+                저장
               </Button>
             </div>
           </div>
@@ -141,8 +137,8 @@ export default function MyInfoSection({ user, device }: MyInfoSectionProps) {
             <span className="infodata">{user?.email || "example@email.com"}</span>
           </div>
           <div className="mo-infoitem">
-            <span className="infolabel">닉네임</span>
-            <span className="infodata">{user?.nickname || "히나"}</span>
+            <span className="infolabel">휴대폰번호</span>
+            <span className="infodata">{user?.phoneNumber || "010-1234-5678"}</span>
           </div>
           <div className="mo-infoitem">
             <span className="infolabel">가입일</span>

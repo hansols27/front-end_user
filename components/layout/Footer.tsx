@@ -1,26 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import Link from 'next/link';
 import { Collapse } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
 import Select from '@/components/common/Select';
 import { languageOptions } from '@/data/constants';
+import { snsIcons } from '@/data/constants';
+import { useDevice } from '@/hooks/useDevice';
 
-const snsIcons = [
-  { name: 'cafe', src: '/icons/cafe.svg', url: 'https://cafe.naver.com/eggkim' },
-  { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
-  { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
-  { name: 'weverse', src: '/icons/weverse.png', url: 'https://weverse.io/qwer/artistpedia' },
-  { name: 'youtube', src: '/icons/youtube.svg', url: 'https://www.youtube.com/channel/UCgD0APk2x9uBlLM0UsmhQjw' },
-  { name: 'shop', src: '/icons/shop.png', url: 'https://qwershop.kr/index.html' },
-];
-
-export default function Footer({ device = "pc" }: { device?: "pc" | "mo" }) {
+export default function Footer() {
+  const device = useDevice();
   const [expanded, setExpanded] = useState(false);
-  const router = useRouter();
 
   const CompanyInfo = () => (
     <>
@@ -177,12 +169,19 @@ export default function Footer({ device = "pc" }: { device?: "pc" | "mo" }) {
               </div>
 
               {/* 화살표 아이콘 */}
-              <div 
-                className={`icon-arrow  transition-transform duration-300 ${expanded ? 'rotate-180' : 'rotate-0'}`}
-                onClick={() => setExpanded(!expanded)} 
-              > 
-                <ExpandMoreIcon sx={{ fontSize: 30, color: 'white' }} />             
-              </div>                           
+              <button
+                type="button"
+                onClick={() => setExpanded(!expanded)}
+                className="footer-toggle-btn"
+                aria-expanded={expanded}
+              >
+                <ExpandMoreIcon
+                  className={`icon-arrow ${
+                    expanded ? 'rotate-180' : 'rotate-0'
+                  }`}
+                  sx={{ fontSize: 30, color: 'white' }}
+                />
+              </button>                          
             </div>
            
             { /* 2단 영역 */ }

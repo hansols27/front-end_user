@@ -1,40 +1,60 @@
-import { SelectHTMLAttributes } from "react";
+'use client';
+
+import { SelectHTMLAttributes, useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  label?: string;      // 라벨 텍스트 (전달 시 select-labeled 적용)
-  device: "pc" | "mo"; // 규격 결정
+  label?: string;
+  device: 'pc' | 'mo';
   options: { value: string; label: string }[];
 }
 
-export default function Select({ 
-  label, 
-  device, 
-  options, 
-  className = "", 
-  ...props 
+export default function Select({
+  label,
+  device,
+  options,
+  className = '',
+  onChange,
+  ...props
 }: SelectProps) {
-  // 1. 디바이스 크기 클래스 생성
   const sizeClass = `select-${device}`;
-    
-  // 2. 라벨 유무에 따른 클래스 분기
-  // label이 존재하면 왼쪽 여백이 포함된 클래스를 선택합니다.
-  const variantClass = label ? "select-labeled" : "select-style";
-    
+  const variantClass = label ? 'select-labeled' : '';
+
+  const [open, setOpen] = useState(false);
+
   return (
     <div className={`select-wrapper ${className}`}>
-      {/* 라벨이 있을 때만 화면에 표시 */}
       {label && <span className="select-inner-label">{label}</span>}
-          
-      <select 
-        className={`select-base ${variantClass} ${sizeClass} ${className}`} 
-        {...props}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+
+        <select
+          className={`select-base select-style ${variantClass} ${sizeClass}`}
+          onMouseDown={() => {
+            setOpen(true);
+          }}
+          onBlur={() => {
+            setOpen(false);
+          }}
+          onChange={(e) => {
+            setOpen(false);
+            onChange?.(e);
+          }}
+          {...props}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        {/* 화살표 */}
+        <KeyboardArrowDownIcon
+          className={`select-arrow pointer-events-none
+            transition-transform duration-300
+            ${open ? 'rotate-180' : 'rotate-0'}
+          `}
+        />
+      
     </div>
   );
 }

@@ -15,3 +15,23 @@ export const CATEGORY_OPTIONS = [
     { value: 'ko', label: 'KR' },
     { value: 'en', label: 'EN' },
   ];
+
+  export const snsIcons = [
+    { name: 'cafe', src: '/icons/cafe.svg', url: 'https://cafe.naver.com/eggkim' },
+    { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
+    { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
+    { name: 'weverse', src: '/icons/weverse.png', url: 'https://weverse.io/qwer/artistpedia' },
+    { name: 'youtube', src: '/icons/youtube.svg', url: 'https://www.youtube.com/channel/UCgD0APk2x9uBlLM0UsmhQjw' },
+    { name: 'shop', src: '/icons/shop.png', url: 'https://qwershop.kr/index.html' },
+  ];
+
+  export const menuItems = [
+    { name: 'Profile', path: '/profile' },
+    { name: 'Discography', path: '/discography' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Video', path: '/video' },
+    { name: 'Schedule', path: '/schedule' },
+    { name: 'Notice', path: '/notice' },
+    { name: 'Community', path: '/community' },
+    { name: 'Mypage', path: '/mypage' },
+  ];

@@ -33,10 +33,10 @@ export default function Card({
       </div>
 
       {/* [2단] 좌측 카테고리 / 우측 정보(작성자+날짜) */}
-      <div className="card-row">
+      <div className="card-row flex items-center justify-between">
         <span className="card-sub">{category}</span>
         
-        <div className="card-sub flex gap-[10px]">
+        <div className="card-sub flex items-center gap-[10px]">
           {author && (
             <>
               <span>{author}</span>

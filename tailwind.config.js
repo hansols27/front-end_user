@@ -18,4 +18,14 @@ module.exports = {
     },
   },
   plugins: [],
+
+  safelist: [
+    'tab-box',
+    'tab-box-active',
+    'tab-line',
+    'tab-line-active',
+    'tab-mo',
+    'tab-pc',
+  ]
 }
+

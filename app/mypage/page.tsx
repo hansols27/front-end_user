@@ -1,61 +1,57 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ReactNode  } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import UserInfo from '@/components/common/UserInfo';
 import Tab from '@/components/common/Tab';
 import ConfirmAlert from '@/components/common/ConfirmAlert';
-import Button from '@/components/common/Button'; 
-import SideLayout from '@/components/layout/SideLayout'; 
-import MyInfoSection from '@/components/section/MyInfoSection'
+import Button from '@/components/common/Button';
+import SideLayout from '@/components/layout/SideLayout';
+import MyInfoSection from '@/components/section/MyInfoSection';
 import MyPostsSection from '@/components/section/MyPostsSection';
 import MyCommentsSection from '@/components/section/MyCommentsSection';
+import { useDevice } from '@/hooks/useDevice';
 
-
-export default function MyPage({ device = "pc" }: { device?: "pc" | "mo" }) {
+export default function MyPage() {
+  const device = useDevice();
   const { user, logout } = useAuth();
   const router = useRouter();
+
   const [activeMenu, setActiveMenu] = useState('내 정보');
   const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
-  const menus = ['내 정보', '내가 쓴 글', '내가 쓴 댓글'];  
 
-  // 메뉴 매핑 객체
-  const menuComponents: Record<string, (device: "pc" | "mo") => React.ReactNode> = {
-    '내 정보': (device) => <MyInfoSection user={user} device={device} />,
-    '내가 쓴 글': (device) => <MyPostsSection device={device} />,
-    '내가 쓴 댓글': (device) => <MyCommentsSection device={device} />, 
-  };
+  if (!device) return null; // hydration-safe
+
+  const menus = ['내 정보', '내가 쓴 글', '내가 쓴 댓글'];
 
   const handleLogoutConfirm = () => {
     logout();
     setIsLogoutAlertOpen(false);
-    router.push("/");
+    router.push('/');
   };
 
-  const renderContent = () => {
-    const Component = menuComponents[activeMenu];
-    return Component ? Component(device) : null;
-  };
-
-  // --- [PC 버전] ---
-  if (device === "pc") {
+  /* =========================
+     PC
+  ========================= */
+  if (device === 'pc') {
     return (
       <SideLayout num="08" title="My page">
-        <div className="pc-content gap-[40px]">
-          <nav className="lnb-wrapper">            
+        <div className="flex">
+          {/* LNB */}
+          <nav className="lnb-wrapper">
             <UserInfo
               type="col"
               size="mypage"
-              nickname={user?.nickname || "Guest"}
-              profileSrc={user?.profileImage || "/images/default-profile.png"}
-            />    
+              nickname={user?.nickname || 'Guest'}
+              profileSrc={user?.profileImage || '/images/default-profile.png'}
+            />
 
             <div className="lnb-menu-list">
               {menus.map((menu) => (
-                <div 
-                  key={menu} 
+                <div
+                  key={menu}
                   className={`lnb-item ${activeMenu === menu ? 'active' : ''}`}
                   onClick={() => setActiveMenu(menu)}
                 >
@@ -66,93 +62,92 @@ export default function MyPage({ device = "pc" }: { device?: "pc" | "mo" }) {
             </div>
 
             <div className="lnb-footer">
-              <Button 
-                variant="black" 
-                size="md" 
-                className="w-full" 
+              <Button
+                variant="black"
+                size="md"
+                className="w-full"
                 onClick={() => setIsLogoutAlertOpen(true)}
               >
                 로그아웃
-              </Button> 
-              <Button 
-                variant="black" 
-                size="md" 
-                className="w-full"
-              >
+              </Button>
+              <Button variant="black" size="md" className="w-full">
                 회원탈퇴
               </Button>
             </div>
           </nav>
 
+          {/* Content */}
           <div className="mypage-content-area">
             <div className="content-title">{activeMenu}</div>
             <div className="content-body">
-              {renderContent()}
+              {activeMenu === '내 정보' && <MyInfoSection user={user} />}
+              {activeMenu === '내가 쓴 글' && <MyPostsSection />}
+              {activeMenu === '내가 쓴 댓글' && <MyCommentsSection />}
             </div>
           </div>
         </div>
 
         <ConfirmAlert
-          device="pc"
+          device={device}
           type="logout"
           isOpen={isLogoutAlertOpen}
           onConfirm={handleLogoutConfirm}
           onCancel={() => setIsLogoutAlertOpen(false)}
-        />        
+        />
       </SideLayout>
     );
   }
 
-  // --- [모바일 버전] ---
-  if (device === "mo") {
+  /* =========================
+     MOBILE
+  ========================= */
+  if (device === 'mo') {
     return (
       <main className="sub-page-layout">
-        <div className="mo-content">          
+        <div className="mo-content">
           <UserInfo
             type="col"
             size="mypage"
-            nickname={user?.nickname || "Guest"}
-            profileSrc={user?.profileImage || "/images/default-profile.png"}
-          />  
-          
-          <div className="flex flex-col gap-[10px]">
+            nickname={user?.nickname || 'Guest'}
+            profileSrc={user?.profileImage || '/images/default-profile.png'}
+          />
+
+          <div className="flex flex-row gap-[10px] pt-[20px]">
             {menus.map((menu) => (
               <Tab
                 key={menu}
                 label={menu}
-                variant="box"      
-                device="mo"        
+                variant="box"
+                device="mo"
                 isActive={activeMenu === menu}
                 onClick={() => setActiveMenu(menu)}
-                className="flex-1" 
+                className="flex-1"
               />
             ))}
           </div>
 
           <div className="flex-1 mt-[30px]">
-             {renderContent()} 
+            {activeMenu === '내 정보' && <MyInfoSection user={user} />}
+            {activeMenu === '내가 쓴 글' && <MyPostsSection />}
+            {activeMenu === '내가 쓴 댓글' && <MyCommentsSection />}
           </div>
 
           <div className="mo-content-footer">
-            <Button 
-              variant="black" 
-              size="md" 
-              className="w-full" 
+            <Button
+              variant="black"
+              size="md"
+              className="w-full"
               onClick={() => setIsLogoutAlertOpen(true)}
             >
               로그아웃
-            </Button> 
-            <Button 
-              variant="black" 
-              size="md" 
-              className="w-full"
-            >
+            </Button>
+            <Button variant="black" size="md" className="w-full">
               회원탈퇴
             </Button>
           </div>
 
           <ConfirmAlert
-            device="mo"
+            device={device}
             type="logout"
             isOpen={isLogoutAlertOpen}
             onConfirm={handleLogoutConfirm}
@@ -162,5 +157,4 @@ export default function MyPage({ device = "pc" }: { device?: "pc" | "mo" }) {
       </main>
     );
   }
-
 }

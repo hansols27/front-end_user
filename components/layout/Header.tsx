@@ -12,8 +12,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import UserInfo from "@/components/common/UserInfo";
 import ConfirmAlert from '@/components/common/ConfirmAlert';
+import { menuItems } from '@/data/constants';
+import { useDevice } from '@/hooks/useDevice';
 
-export default function Header({ device }: { device: "pc" | "mo" }) {
+export default function Header() {
+  const device = useDevice();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -24,16 +27,6 @@ export default function Header({ device }: { device: "pc" | "mo" }) {
   useEffect(() => {
     setMounted(true); 
   }, []);
-
-  const menuItems = [
-    { name: 'Profile', path: '/profile' },
-    { name: 'Discography', path: '/discography' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Video', path: '/video' },
-    { name: 'Schedule', path: '/schedule' },
-    { name: 'Notice', path: '/notice' },
-    { name: 'Community', path: '/community' },
-  ];
 
   const currentMenu = menuItems.find(item => item.path === pathname)?.name || 'Home';
   if (!mounted) return null;
@@ -146,7 +139,10 @@ export default function Header({ device }: { device: "pc" | "mo" }) {
       <>
         <header className="header-wrapper">
           {/* 1. Logo */}
-          <div className="header-logo" onClick={() => router.push('/')}>
+          <div 
+            className="header-logo" 
+            onClick={() => router.push('/')}
+            >
             <Image 
               src="/logo.svg" 
               alt="QWER Logo" 
@@ -162,8 +158,12 @@ export default function Header({ device }: { device: "pc" | "mo" }) {
   
           {/* 3. Hamburger Menu Button */}
           <div className="icon-hamburger">
-            <button onClick={() => setIsMenuOpen(true)}>
-              <MenuIcon sx={{ fontSize: 30, color: 'white' }} />
+            <button 
+              onClick={() => setIsMenuOpen(true)}
+              >
+              <MenuIcon 
+                sx={{ fontSize: 30, color: 'white' }} 
+              />
             </button>
           </div>
         </header>
@@ -217,11 +217,17 @@ export default function Header({ device }: { device: "pc" | "mo" }) {
                       profileSrc={user?.profileImage || "/images/default-profile.png"}
                     />
                     {/* 화살표 아이콘 */}
-                    <div className="icon-arrow" onClick={() => {
-                          router.push('/mypage');
-                          setIsMenuOpen(false);
-                        }}>
-                      <ChevronRightIcon sx={{ fontSize: 30, color: 'white' }} />
+                    <div 
+                      className="icon-arrow" 
+                      onClick={() => { router.push('/mypage'); setIsMenuOpen(false);                         
+                      }}
+                      > 
+                      <ChevronRightIcon 
+                        sx={{ 
+                          fontSize: 30, 
+                          color: 'white'                           
+                        }} 
+                      /> 
                     </div>
                   </div> 
                   <div className="login-btn logout">

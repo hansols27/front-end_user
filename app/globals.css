@@ -166,27 +166,44 @@
   .user-size-mypage { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[100px] h-[100px]; } & .nickname { @apply text-h2; } }
 
   .camera-badge {
-    @apply absolute bottom-0 right-0 bg-white rounded-full flex items-center justify-center shadow-md border border-gray-200 cursor-pointer;
-    background: url("data:image/svg+xml,...") no-repeat center;
+    @apply absolute right-0 bottom-0 flex items-center justify-center
+           rounded-full cursor-pointer z-10
+           bg-black/60;
   }
-  .pc-camera { @apply w-[40px] h-[40px]; background-size: 20px; }
-  .mo-camera { @apply w-[30px] h-[30px]; background-size: 15px; }
 
-  /* 1. PC 레이아웃 (가로 4열 배열) */
-  .pc-infobox { 
-    /* 4개의 아이템이 가로로 나란히 배치되도록 grid 사용 */
-    @apply grid grid-cols-4 gap-[20px] w-full; 
+  .pc-camera {
+    @apply w-[40px] h-[40px];
+    background: url('/icons/icon-camera-white.svg') no-repeat center / 20px 20px;
+  }
+  
+  .mo-camera {
+    @apply w-[30px] h-[30px];
+    background: url('/icons/icon-camera-white.svg') no-repeat center / 15px 15px;
+  }
 
-    .pc-infoitem {
-      /* 라벨과 데이터를 위아래로 배치 */
-      @apply flex flex-col items-start w-full gap-[10px]; 
+  /* 1. PC 레이아웃 (가로 4열) */
+  .pc-infobox {
+    @apply grid gap-[20px];
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-      .infolabel {
-        @apply text-h5 text-black/40 font-medium; /* 라벨은 작고 흐리게 */
-      }
-      .infodata {
-        @apply text-h4 text-black font-bold; /* 데이터는 크고 진하게 */
-      }
+  /* infobox 내부 아이템 */
+  .pc-infobox .pc-infoitem {
+    @apply flex flex-col items-start w-full gap-[10px];
+  }
+
+  .pc-infobox .pc-infoitem .infolabel {
+    @apply text-h5 text-black/40 font-medium;
+  }
+
+  .pc-infobox .pc-infoitem .infodata {
+    @apply text-h4 text-black font-bold;
+  }
+
+  /* 1280px 이하 → 2 × 2 */
+  @media (max-width: 1280px) {
+    .pc-infobox {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -235,28 +252,7 @@
 
       .content-text { 
         @apply text-h3 lg:text-h2 whitespace-nowrap leading-relaxed; 
-      }
-      /* 푸터 내부의 셀렉트 박스 전용 스타일 */
-      .footer-select-box {
-        .select-base {
-          /* 배경은 흰색, 글자는 검정색으로 강제 적용 */
-          @apply bg-white text-black border-black;
-          
-          /* 브라우저 기본 스타일 제거 (커스텀 화살표 사용을 위해) */
-          @apply appearance-none;
-      
-          /* 옵션 리스트도 흰색 배경에 검정 텍스트 유지 */
-          option {
-            @apply bg-white text-black;
-          }
-      
-          /* 화살표 아이콘을 검정색으로 변경 */
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
-          background-repeat: no-repeat;
-          background-position: right 10px center;
-          background-size: 14px;
-        }
-      }
+      }      
     }
 
     .footer-sns-list { 
@@ -319,22 +315,81 @@
   .btn-black { @apply bg-white text-black border border-black hover:bg-gray-50; }
 
   .input-base, .select-base {
-    @apply flex items-center px-4 outline-none w-full border border-transparent bg-white text-black rounded-base;
+    @apply appearance-none flex items-center px-[15px] outline-none w-full
+           border border-black bg-white text-black rounded-base;
     transition: var(--transition-base);
   }
+
   .input-pc, .select-pc { @apply text-h5 h-[40px]; }
   .input-mo, .select-mo { @apply text-h6 h-[30px]; }
-  .input-style, .select-style { @apply border-black focus:border-qwer-hina focus:ring-1 focus:ring-qwer-hina; }
+  .input-style, .select-style { @apply focus:border-qwer-hina focus:ring-1 focus:ring-qwer-hina; }
 
-  .select-base {
-    @apply appearance-none cursor-pointer pr-10;
-    background: url("data:image/svg+xml,...") no-repeat right 10px center / 20px;
-    option { @apply bg-white text-black; }
+  .input-search {
+    @apply pr-[45px];
   }
-  .input-search { @apply pl-10; background: url("data:image/svg+xml,...") no-repeat left 10px center / 20px; }
 
-  .tab-base { @apply inline-flex items-center justify-center cursor-pointer outline-none rounded-base transition-(--transition-base); }
-  .tab-line-active { @apply text-black font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-black after:content-['']; }
+  .input-search-icon {
+    @apply absolute right-[15px] top-1/2 -translate-y-1/2
+           text-black pointer-events-none;
+  }
+
+  .select-arrow {
+    @apply absolute right-[15px] top-1/2 -translate-y-1/2
+           text-black pointer-events-none;
+  }
+
+  .icon-arrow {
+    @apply transition-transform duration-300;
+  }
+
+  .select-wrapper {
+    @apply relative w-full;
+  }
+  
+  .select-labeled {
+    @apply pl-[15px];
+    text-indent: 35px;
+  }
+  
+  .select-inner-label {
+    @apply absolute left-[15px] top-1/2 -translate-y-1/2
+           text-black/40 text-h5 pointer-events-none z-10;
+  }
+  
+   /* 공통 */
+  .tab-base {
+    @apply inline-flex items-center justify-center
+          cursor-pointer outline-none
+          rounded-base
+          transition-(--transition-base);
+  }
+
+  /* size */
+  .tab-pc { @apply h-[50px] text-h4; }
+  .tab-mo { @apply h-[40px] text-h5; }
+
+  /* line */
+  .tab-line {
+    @apply text-black;
+  }
+
+  .tab-line-active {
+    @apply text-black font-bold relative;
+  }
+  .tab-line-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-black;
+  }
+
+  /* box */
+  .tab-box {
+    @apply border border-black text-black;
+  }
+
+  .tab-box-active {
+    @apply border border-black bg-black text-white;
+  }
+
   .card-list, .noti-card { @apply flex flex-col w-full bg-white text-black border border-black p-5 gap-[10px] rounded-base transition-(--transition-base); }
 
   .tag-author-base { @apply text-h6 inline-flex items-center justify-center text-white px-2 rounded-[4px] h-[20px] leading-none; }
@@ -370,44 +425,51 @@
   /* [공통] 서브 페이지 기본 레이아웃 엔진 */
   .sub-page-layout {
     @apply w-full min-h-screen bg-white text-black max-w-[1920px] flex flex-col;
-    
-    /* --- 1. 컨텐츠 영역 (PC/모바일 공통 클래스) --- */
+  
+    /* ===============================
+       PC CONTENT (고정 140 / 유동 / 140)
+    =============================== */
     .pc-content {
-      /* PC 공통: 상하 80px, 좌측 260px 고정 */
-      @apply hidden lg:flex flex-row w-full flex-1 pt-[80px] pb-[80px] pl-[260px] bg-white;
+      @apply hidden lg:grid flex-1 bg-white;
+      grid-template-columns: 140px minmax(0, 1fr) 140px;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
-
+  
+    /* ===============================
+       MOBILE CONTENT (기존 유지)
+    =============================== */
     .mo-content {
-      /* 모바일 공통: 상하 40px, 좌우 35px 고정 */
       @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-white;
     }
-
-    /* --- 2. 타입별 우측 여백 및 사이드바 제어 (PC) --- */
-    
-    /* CASE A: No Title (로그인, 약관 등) */
+  
+    /* ===============================
+       NO TITLE TYPE (로그인 등)
+    =============================== */
     &.layout-no-title {
       .pc-content {
-        @apply pr-[260px]; /* 좌우 대칭 260px */
+        /* 좌 / 중앙 / 우 구조는 유지, 중앙만 사용 */
+        column-gap: 0;
       }
     }
-
-    /* CASE B: Side Layout (마이페이지 등) */
+  
+    /* ===============================
+       SIDE LAYOUT TYPE
+    =============================== */
     &.layout-side {
-      @apply lg:flex-row lg:items-stretch;
-
       .pc-content {
-        /* 컨텐츠 우측은 사이드바와의 간격 90px만 유지 */
-        /* (전체 구조상 우측 끝에서 260px 지점에 컨텐츠가 끝남) */
-        @apply pr-[220px]; 
+        column-gap: 0px; /* LNB ↔ 콘텐츠 간격 */
       }
-
+  
       .title-type-side {
-        /* 우측 끝에서 140px 지점에 고정 (너비 30px) */
-        @apply hidden lg:flex flex-col items-center justify-center shrink-0 w-[30px] h-screen sticky top-0 order-2 mr-[140px] gap-[20px];
-
+        @apply hidden lg:flex flex-col items-center justify-center gap-[20px];
+        grid-column: 3;        /* 우측 140px 고정 컬럼 */
+        position: sticky;
+        top: 80px;
+  
         .num { @apply text-h3 font-bold; }
         .line { @apply w-px h-[180px] bg-black opacity-30; }
-        .text { 
+        .text {
           @apply text-h3 font-bold text-center uppercase tracking-widest;
           writing-mode: vertical-rl;
         }
@@ -418,6 +480,9 @@
   /* --- 3. 마이페이지 내부 LNB 및 컨텐츠 세부 스타일 --- */
   .lnb-wrapper {
     @apply flex flex-col w-[200px] shrink-0 border rounded-[12px] border-black p-[40px] gap-[20px];
+
+    align-self: flex-start;
+    height: fit-content;
   }
 
   .lnb-menu-list {
@@ -440,15 +505,15 @@
 
   .mypage-content-area {
     /* LNB와 컨텐츠 사이 간격 80px */
-    @apply flex-1 ml-[80px];
+    @apply flex-1 ml-[80px] mr-[80px];
     
     .content-title {
-      @apply text-h3 font-bold text-black border-b border-black pb-[20px] mb-[40px];
+      @apply text-h3 font-bold text-black border-b-2 border-black pb-[20px] mb-[40px];
     }
   }
 
   .mo-content-footer {
-    @apply flex flex-row pt-[20px] gap-[10px] border-t border-black;
+    @apply flex flex-row pt-[20px] gap-[10px] border-t-2 border-black;
   }
 
   /* [공통] MUI Checkbox 커스텀 스타일 */
