@@ -1,4 +1,12 @@
-export const ALERT_MESSAGES = {
+import { ReactNode } from "react";
+
+interface AlertMessage {
+  title: string;
+  message: ReactNode;
+  confirmText: string;
+}
+
+export const ALERT_MESSAGES: Record<string, AlertMessage> = {
     submit: {
       title: "등록하시겠습니까?",
       message: "입력하신 내용이 등록됩니다.",
@@ -21,7 +29,7 @@ export const ALERT_MESSAGES = {
     },
     withdraw: {
       title: "회원 탈퇴",
-      message: "탈퇴 시 모든 데이터가 삭제됩니다. 계속하시겠습니까?",
+      message: "탈퇴 시 모든 데이터가 삭제됩니다.\n계속하시겠습니까?",
       confirmText: "회원탈퇴",
     },
     cancel: { 
@@ -29,6 +37,6 @@ export const ALERT_MESSAGES = {
       message: "작성 중인 내용을 취소하시겠습니까?", 
       confirmText: "확인" 
     },
-  } as const;
+  };
   
   export type AlertType = keyof typeof ALERT_MESSAGES;

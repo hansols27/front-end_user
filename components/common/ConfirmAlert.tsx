@@ -1,11 +1,14 @@
 import { ALERT_MESSAGES, AlertType } from "@/constants/alertMessage";
-import Button from "@/components/common/Button"; // 버튼 컴포넌트 임포트
+import Button from "@/components/common/Button";
+import { ALERT_TO_TOAST_MAP } from "@/constants/alertToToastMap";
+import { TOAST_MESSAGES } from "@/constants/toastMessage";
+import { toast } from "react-toastify";
 
 interface ConfirmAlertProps {
   device: "pc" | "mo";
   type: AlertType;
   isOpen: boolean;
-  onConfirm: () => void;
+  onConfirm: () => void | Promise<void>;
   onCancel: () => void;
 }
 
@@ -20,31 +23,44 @@ export default function ConfirmAlert({
 
   const data = ALERT_MESSAGES[type];
   const sizeClass = device === "pc" ? "alert-size-pc" : "alert-size-mo";
-  
-  // 디바이스에 따른 버튼 사이즈 결정
   const btnSize = device === "pc" ? "md" : "sm";
+
+  /** ✅ Confirm 버튼 클릭 핸들러 */
+  const handleConfirm = async () => {
+    try {
+      await onConfirm();
+
+      const toastType = ALERT_TO_TOAST_MAP[type];
+      if (toastType) {
+        toast.success(TOAST_MESSAGES[toastType]);
+      }
+    } catch (error) {
+      toast.error(TOAST_MESSAGES.error_system);
+    }
+  };
 
   return (
     <div className="alert-overlay">
-      <div className={`alert-box ${sizeClass}`}>        
-        
-        {/* [1단] 메시지 내용 */}
-        <div className="alert-message text-h4 p-[25px]">{data.message}</div>
+      <div className={`alert-box ${sizeClass}`}>
+        {/* 메시지 */}
+        <div className="alert-message text-h4 p-[25px]">
+          {data.message}
+        </div>
 
-        {/* [2단] 버튼 그룹: 공통 Button 컴포넌트 적용 */}
+        {/* 버튼 */}
         <div className="alert-btn-group flex gap-[10px] w-full mt-[20px]">
-          <Button 
-            variant="black" 
+          <Button
+            variant="black"
             size={btnSize}
             onClick={onCancel}
-            className="flex-1" // 버튼이 동일한 너비를 갖도록 설정
+            className="flex-1"
           >
             취소
           </Button>
-          <Button 
-            variant="blue" 
+          <Button
+            variant="blue"
             size={btnSize}
-            onClick={onConfirm}
+            onClick={handleConfirm}
             className="flex-1"
           >
             {data.confirmText}

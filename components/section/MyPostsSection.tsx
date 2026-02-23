@@ -99,7 +99,7 @@ export default function MyPostsSection() {
         </div>
 
         {/* 카드 리스트 (10개) */}
-        <div className="flex flex-col gap-[20px] mb-[40px]">
+        <div className="flex flex-col gap-[20px]">
           {visibleItems.map((_, i) => (
             <Card
               key={startIndex + i}
@@ -112,7 +112,7 @@ export default function MyPostsSection() {
         </div>
 
         {/* 페이지네이션 */}
-        <div className="flex justify-center mt-10 mb-[100px]">
+        <div className="flex justify-center mt-[40px]">
           <MuiPagination
             count={TOTAL_PAGES}
             page={currentPage}
@@ -131,7 +131,7 @@ export default function MyPostsSection() {
     return (
       <div className="flex flex-col w-full">
         {/* 검색 영역 */}
-        <div className="flex flex-col gap-[10px] mb-[30px]">
+        <div className="flex flex-col gap-[10px] mb-[20px]">
           <Select
             device="pc"
             label="구분"
@@ -155,7 +155,7 @@ export default function MyPostsSection() {
         </div>
 
         {/* 카드 리스트 (5개) */}
-        <div className="flex flex-col gap-[20px] mb-[40px]">
+        <div className="flex flex-col gap-[20px]">
           {visibleItems.map((_, i) => (
             <Card
               key={startIndex + i}
@@ -168,7 +168,7 @@ export default function MyPostsSection() {
         </div>
 
         {/* 페이지네이션 (총 4페이지) */}
-        <div className="flex justify-center mt-[20px] mb-[60px]">
+        <div className="flex justify-center mt-[20px]">
           <MuiPagination
             count={TOTAL_PAGES}
             page={currentPage}

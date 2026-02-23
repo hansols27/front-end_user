@@ -95,7 +95,7 @@ export default function MyCommentsSection() {
         </div>
 
         {/* 댓글 리스트 (PC) */}
-        <div className="flex flex-col gap-[20px] mb-[40px]">
+        <div className="flex flex-col gap-[20px]">
           {Array.from({ length: 10 }).map((_, i) => (
             <Card
               key={i}
@@ -110,7 +110,7 @@ export default function MyCommentsSection() {
         </div>
 
         {/* 페이지네이션 */}
-        <div className="flex justify-center mt-10 mb-[100px]">
+        <div className="flex justify-center mt-[40px]">
           <MuiPagination
             count={TOTAL_PAGES}
             page={currentPage}
@@ -126,7 +126,7 @@ export default function MyCommentsSection() {
   if (device === "mo") {
     return (
       <div className="flex flex-col w-full">
-        <div className="flex flex-col gap-[10px] mb-[30px]">
+        <div className="flex flex-col gap-[10px] mb-[20px]">
           <Select 
             device="pc"
             label="구분"
@@ -149,7 +149,8 @@ export default function MyCommentsSection() {
           />
         </div>
 
-        <div className="flex flex-col gap-[20px] mb-[40px]">
+        {/* 카드 리스트 (5개) */}    
+        <div className="flex flex-col gap-[20px]">
           {Array.from({ length: 5 }).map((_, i) => (
             <Card
               key={i}
@@ -163,7 +164,7 @@ export default function MyCommentsSection() {
         </div>
 
         {/* 페이지네이션 */}
-        <div className="flex justify-center mt-10 mb-[100px]">
+        <div className="flex justify-center mt-[20px]">
           <MuiPagination
             count={TOTAL_PAGES}
             page={currentPage}

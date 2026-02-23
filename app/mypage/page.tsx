@@ -16,11 +16,12 @@ import { useDevice } from '@/hooks/useDevice';
 
 export default function MyPage() {
   const device = useDevice();
-  const { user, logout } = useAuth();
+  const { user, logout, withdraw } = useAuth();
   const router = useRouter();
 
   const [activeMenu, setActiveMenu] = useState('내 정보');
   const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
+  const [isDrawAlertOpen, setIsDrawAlertOpen] = useState(false);
 
   if (!device) return null; // hydration-safe
 
@@ -29,6 +30,12 @@ export default function MyPage() {
   const handleLogoutConfirm = () => {
     logout();
     setIsLogoutAlertOpen(false);
+    router.push('/');
+  };
+
+  const handleDrawConfirm = () => {
+    withdraw();
+    setIsDrawAlertOpen(false);
     router.push('/');
   };
 
@@ -70,9 +77,14 @@ export default function MyPage() {
               >
                 로그아웃
               </Button>
-              <Button variant="black" size="md" className="w-full">
-                회원탈퇴
-              </Button>
+              <Button 
+                variant="black" 
+                size="md" 
+                className="w-full"
+                onClick={() => setIsDrawAlertOpen(true)}
+            >
+              회원탈퇴
+            </Button>
             </div>
           </nav>
 
@@ -94,6 +106,14 @@ export default function MyPage() {
           onConfirm={handleLogoutConfirm}
           onCancel={() => setIsLogoutAlertOpen(false)}
         />
+
+        <ConfirmAlert
+            device={device}
+            type="withdraw"
+            isOpen={isDrawAlertOpen}
+            onConfirm={handleDrawConfirm}
+            onCancel={() => setIsDrawAlertOpen(false)}
+          />
       </SideLayout>
     );
   }
@@ -111,6 +131,25 @@ export default function MyPage() {
             nickname={user?.nickname || 'Guest'}
             profileSrc={user?.profileImage || '/images/default-profile.png'}
           />
+
+          <div className="mo-content-footer">
+            <Button
+              variant="black"
+              size="md"
+              className="w-full"
+              onClick={() => setIsLogoutAlertOpen(true)}
+            >
+              로그아웃
+            </Button>
+            <Button 
+              variant="black" 
+              size="md" 
+              className="w-full"
+              onClick={() => setIsDrawAlertOpen(true)}
+            >
+              회원탈퇴
+            </Button>
+          </div>
 
           <div className="flex flex-row gap-[10px] pt-[20px]">
             {menus.map((menu) => (
@@ -130,21 +169,7 @@ export default function MyPage() {
             {activeMenu === '내 정보' && <MyInfoSection user={user} />}
             {activeMenu === '내가 쓴 글' && <MyPostsSection />}
             {activeMenu === '내가 쓴 댓글' && <MyCommentsSection />}
-          </div>
-
-          <div className="mo-content-footer">
-            <Button
-              variant="black"
-              size="md"
-              className="w-full"
-              onClick={() => setIsLogoutAlertOpen(true)}
-            >
-              로그아웃
-            </Button>
-            <Button variant="black" size="md" className="w-full">
-              회원탈퇴
-            </Button>
-          </div>
+          </div>          
 
           <ConfirmAlert
             device={device}
@@ -152,6 +177,14 @@ export default function MyPage() {
             isOpen={isLogoutAlertOpen}
             onConfirm={handleLogoutConfirm}
             onCancel={() => setIsLogoutAlertOpen(false)}
+          />
+
+          <ConfirmAlert
+            device={device}
+            type="withdraw"
+            isOpen={isDrawAlertOpen}
+            onConfirm={handleDrawConfirm}
+            onCancel={() => setIsDrawAlertOpen(false)}
           />
         </div>
       </main>

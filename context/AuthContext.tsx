@@ -17,6 +17,7 @@ interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
   logout: () => void;
+  withdraw: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,8 +43,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const withdraw = async () => {
+    try {
+      /**
+       * ✅ 여기에 실제 회원탈퇴 API 호출
+       * 예시:
+       * await api.delete('/users/me');
+       */
+
+      // 인증 정보 정리
+      localStorage.removeItem('user');
+      setUser(null);
+
+    } catch (error) {
+      console.error('회원탈퇴 실패:', error);
+      throw error; // UI에서 에러 처리 가능
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, withdraw  }}>
       {children}
     </AuthContext.Provider>
   );
