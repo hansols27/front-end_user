@@ -39,6 +39,14 @@ export default function Header() {
     router.push("/");
   };
 
+  const isLoginPage = pathname === '/login';
+
+  const mobileHeaderTitle = (() => {
+    if (isLoginPage) return null;
+    if (isLoggedIn && pathname === '/mypage') return 'Mypage';
+    return currentMenu;
+  })();
+
   // --- [PC 버전] ---
   if (device === "pc") {    
 
@@ -153,7 +161,7 @@ export default function Header() {
   
           {/* 2. Menu Title (현재 위치 표시) */}
           <div className="header-mobile-menu">
-            {currentMenu}
+            {mobileHeaderTitle}
           </div> 
   
           {/* 3. Hamburger Menu Button */}
@@ -262,9 +270,9 @@ export default function Header() {
           </div>
         )}
   
-        {/* 알럿 컴포넌트 (디바이스 속성을 "mo"로 변경) */}
+        {/* 알럿 컴포넌트 */}
         <ConfirmAlert
-          device={device}
+          device="pc"
           type="logout"
           isOpen={isLogoutAlertOpen}
           onConfirm={handleLogoutConfirm}

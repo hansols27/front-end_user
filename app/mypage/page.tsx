@@ -172,7 +172,7 @@ export default function MyPage() {
           </div>          
 
           <ConfirmAlert
-            device={device}
+            device="pc"
             type="logout"
             isOpen={isLogoutAlertOpen}
             onConfirm={handleLogoutConfirm}
@@ -180,7 +180,7 @@ export default function MyPage() {
           />
 
           <ConfirmAlert
-            device={device}
+            device="pc"
             type="withdraw"
             isOpen={isDrawAlertOpen}
             onConfirm={handleDrawConfirm}

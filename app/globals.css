@@ -427,7 +427,7 @@
     @apply w-full min-h-screen bg-white text-black max-w-[1920px] flex flex-col;
   
     /* ===============================
-       PC CONTENT (고정 140 / 유동 / 140)
+       PC CONTENT (공통 레이아웃 엔진)
     =============================== */
     .pc-content {
       @apply hidden lg:grid flex-1 bg-white;
@@ -437,19 +437,31 @@
     }
   
     /* ===============================
-       MOBILE CONTENT (기존 유지)
+       MOBILE CONTENT
     =============================== */
     .mo-content {
       @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-white;
     }
   
     /* ===============================
-       NO TITLE TYPE (로그인 등)
+       NO TITLE TYPE (로그인 전용)
     =============================== */
     &.layout-no-title {
       .pc-content {
-        /* 좌 / 중앙 / 우 구조는 유지, 중앙만 사용 */
-        column-gap: 0;
+        grid-template-columns: 1fr;   
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+  
+      .sub-content {
+        @apply
+          w-full
+          max-w-[480px]
+          mx-auto
+          flex
+          items-center
+          justify-center
+          min-h-screen;
       }
     }
   
@@ -458,17 +470,25 @@
     =============================== */
     &.layout-side {
       .pc-content {
-        column-gap: 0px; /* LNB ↔ 콘텐츠 간격 */
+        grid-template-columns: 140px minmax(0, 1fr) 140px; /* 🔴 다시 강제 */
+        column-gap: 0px;
       }
   
       .title-type-side {
         @apply hidden lg:flex flex-col items-center justify-center gap-[20px];
-        grid-column: 3;        /* 우측 140px 고정 컬럼 */
+        grid-column: 3;
         position: sticky;
         top: 80px;
+        height: fit-content;
   
-        .num { @apply text-h3 font-bold; }
-        .line { @apply w-px h-[180px] bg-black opacity-30; }
+        .num {
+          @apply text-h3 font-bold;
+        }
+  
+        .line {
+          @apply w-px h-[180px] bg-black opacity-30;
+        }
+  
         .text {
           @apply text-h3 font-bold text-center uppercase tracking-widest;
           writing-mode: vertical-rl;
@@ -514,28 +534,6 @@
 
   .mo-content-footer {
     @apply flex flex-row pt-[20px] gap-[10px];
-  }
-
-  /* [공통] MUI Checkbox 커스텀 스타일 */
-  .custom-checkbox {
-    @apply p-0;
-    
-    .MuiSvgIcon-root {
-      /* 박스 크기 및 테두리 설정 */
-      @apply w-[25px] h-[25px] rounded-[4px] bg-white border border-black transition-all;
-      color: transparent; 
-    }
-
-    &.Mui-checked { 
-      .MuiSvgIcon-root {
-        @apply bg-white border-black; 
-        color: var(--color-qwer-hina); 
-        transform: scale(1.5); 
-      }
-    }
-    
-    /* 터치 시 나오는 회색 원형 배경(Ripple) 제거 */
-    &:hover { @apply bg-transparent; }
   }  
 
   /* MUI Pagination 커스텀 스타일 */
