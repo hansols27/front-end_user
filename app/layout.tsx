@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { AuthProvider } from '@/context/AuthContext';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,12 +34,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <div className="flex flex-col min-h-screen">
-                {device && <Header device={device} />}
+                <Header />
                 <main>
                   {children}
+                  <Toaster
+                    position="bottom-center"
+                    toastOptions={{
+                      style: {
+                        zIndex: 9999,
+                      },
+                    }}
+                  />
                 </main>
 
-                {device && <Footer device={device} />}
+                <Footer />
               </div>
             </ThemeProvider>
           </AuthProvider>

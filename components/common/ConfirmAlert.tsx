@@ -2,7 +2,7 @@ import { ALERT_MESSAGES, AlertType } from "@/constants/alertMessage";
 import Button from "@/components/common/Button";
 import { ALERT_TO_TOAST_MAP } from "@/constants/alertToToastMap";
 import { TOAST_MESSAGES } from "@/constants/toastMessage";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 interface ConfirmAlertProps {
   device: "pc" | "mo";
@@ -29,12 +29,12 @@ export default function ConfirmAlert({
   const handleConfirm = async () => {
     try {
       await onConfirm();
-
+  
       const toastType = ALERT_TO_TOAST_MAP[type];
       if (toastType) {
         toast.success(TOAST_MESSAGES[toastType]);
       }
-    } catch (error) {
+    } catch {
       toast.error(TOAST_MESSAGES.error_system);
     }
   };
@@ -43,7 +43,7 @@ export default function ConfirmAlert({
     <div className="alert-overlay">
       <div className={`alert-box ${sizeClass}`}>
         {/* 메시지 */}
-        <div className="alert-message text-h4 p-[25px]">
+        <div className="alert-message text-h4 p-[25px] text-center">
           {data.message}
         </div>
 

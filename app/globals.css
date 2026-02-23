@@ -431,9 +431,11 @@
     =============================== */
     .pc-content {
       @apply hidden lg:grid flex-1 bg-white;
-      grid-template-columns: 140px minmax(0, 1fr) 140px;
+      grid-template-columns: 140px minmax(0, 1fr) 140px; /* 좌140 / 중앙 유동 / 우140 */
+      column-gap: 0; /* LNB ↔ 중앙 ↔ 우측 간격 제거 */
       padding-top: 80px;
       padding-bottom: 80px;
+      min-width: 0; /* 중앙 콘텐츠 overflow 안정화 */
     }
   
     /* ===============================
@@ -448,7 +450,7 @@
     =============================== */
     &.layout-no-title {
       .pc-content {
-        grid-template-columns: 1fr;   
+        grid-template-columns: 1fr;
         padding-top: 0;
         padding-bottom: 0;
       }
@@ -470,13 +472,15 @@
     =============================== */
     &.layout-side {
       .pc-content {
-        grid-template-columns: 140px minmax(0, 1fr) 140px; /* 🔴 다시 강제 */
-        column-gap: 0px;
+        grid-template-columns: 140px minmax(0, 1fr) 140px; /* 좌우 140px 강제 */
+        column-gap: 0; 
       }
   
+      /* 우측 사이드 제목 영역 */
       .title-type-side {
         @apply hidden lg:flex flex-col items-center justify-center gap-[20px];
-        grid-column: 3;
+        width: 140px;           /* 반드시 고정 폭 */
+        grid-column: 3;          /* 우측 140px 컬럼 */
         position: sticky;
         top: 80px;
         height: fit-content;
@@ -493,6 +497,11 @@
           @apply text-h3 font-bold text-center uppercase tracking-widest;
           writing-mode: vertical-rl;
         }
+      }
+  
+      /* 중앙 콘텐츠 영역 안정화 */
+      .mypage-content-area {
+        @apply min-w-0 flex-1; /* 그리드 내 flex overflow 안정화 */
       }
     }
   }

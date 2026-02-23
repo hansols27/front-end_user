@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactNode  } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -22,26 +22,44 @@ export default function MyPage() {
   const [activeMenu, setActiveMenu] = useState('내 정보');
   const [isLogoutAlertOpen, setIsLogoutAlertOpen] = useState(false);
   const [isDrawAlertOpen, setIsDrawAlertOpen] = useState(false);
-
-  if (!device) return null; // hydration-safe
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const menus = ['내 정보', '내가 쓴 글', '내가 쓴 댓글'];
 
+  // -------------------------------
+  // Redirect 안정화 (logout / withdraw 후)
+  // -------------------------------
+  useEffect(() => {
+    if (!shouldRedirect) return;
+
+    const timer = setTimeout(() => {
+      router.push('/');
+      setShouldRedirect(false); // 상태 초기화
+    }, 800);
+
+    return () => clearTimeout(timer); // cleanup
+  }, [shouldRedirect, router]);
+
+  // -------------------------------
+  // 로그아웃 / 회원탈퇴 ConfirmAlert 핸들러
+  // -------------------------------
   const handleLogoutConfirm = () => {
     logout();
     setIsLogoutAlertOpen(false);
-    router.push('/');
+    setShouldRedirect(true);
   };
 
   const handleDrawConfirm = () => {
     withdraw();
     setIsDrawAlertOpen(false);
-    router.push('/');
+    setShouldRedirect(true);
   };
 
-  /* =========================
-     PC
-  ========================= */
+  if (!device) return null; // hydration-safe
+
+  // =========================
+  // PC 버전
+  // =========================
   if (device === 'pc') {
     return (
       <SideLayout num="08" title="My page">
@@ -79,12 +97,12 @@ export default function MyPage() {
               </Button>
               <Button 
                 variant="black" 
-                size="md" 
+                size="md"
                 className="w-full"
                 onClick={() => setIsDrawAlertOpen(true)}
-            >
-              회원탈퇴
-            </Button>
+              >
+                회원탈퇴
+              </Button>
             </div>
           </nav>
 
@@ -99,6 +117,7 @@ export default function MyPage() {
           </div>
         </div>
 
+        {/* ConfirmAlert */}
         <ConfirmAlert
           device={device}
           type="logout"
@@ -108,19 +127,19 @@ export default function MyPage() {
         />
 
         <ConfirmAlert
-            device={device}
-            type="withdraw"
-            isOpen={isDrawAlertOpen}
-            onConfirm={handleDrawConfirm}
-            onCancel={() => setIsDrawAlertOpen(false)}
-          />
+          device={device}
+          type="withdraw"
+          isOpen={isDrawAlertOpen}
+          onConfirm={handleDrawConfirm}
+          onCancel={() => setIsDrawAlertOpen(false)}
+        />
       </SideLayout>
     );
   }
 
-  /* =========================
-     MOBILE
-  ========================= */
+  // =========================
+  // MOBILE 버전
+  // =========================
   if (device === 'mo') {
     return (
       <main className="sub-page-layout">
@@ -132,6 +151,7 @@ export default function MyPage() {
             profileSrc={user?.profileImage || '/images/default-profile.png'}
           />
 
+          {/* 모바일 ConfirmAlert는 버튼 크기 PC 유지 */}
           <div className="mo-content-footer">
             <Button
               variant="black"
@@ -143,7 +163,7 @@ export default function MyPage() {
             </Button>
             <Button 
               variant="black" 
-              size="md" 
+              size="md"
               className="w-full"
               onClick={() => setIsDrawAlertOpen(true)}
             >
@@ -151,6 +171,7 @@ export default function MyPage() {
             </Button>
           </div>
 
+          {/* 탭 메뉴 */}
           <div className="flex flex-row gap-[10px] pt-[20px]">
             {menus.map((menu) => (
               <Tab
@@ -165,14 +186,16 @@ export default function MyPage() {
             ))}
           </div>
 
+          {/* 컨텐츠 */}
           <div className="flex-1 mt-[30px]">
             {activeMenu === '내 정보' && <MyInfoSection user={user} />}
             {activeMenu === '내가 쓴 글' && <MyPostsSection />}
             {activeMenu === '내가 쓴 댓글' && <MyCommentsSection />}
-          </div>          
+          </div>
 
+          {/* ConfirmAlert */}
           <ConfirmAlert
-            device="pc"
+            device="pc" // 버튼 크기 PC 유지
             type="logout"
             isOpen={isLogoutAlertOpen}
             onConfirm={handleLogoutConfirm}
