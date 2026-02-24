@@ -20,7 +20,6 @@ export default function GalleryPage() {
   
   // 상태 관리
   const [currentPage, setCurrentPage] = useState(1);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [selectedImg, setSelectedImg] = useState<string | null>(null); // 모달용
   const [mobileItems, setMobileItems] = useState(ALL_IMAGES.slice(0, 30)); // 모바일 무한스크롤 데이터
   const observerTarget = useRef<HTMLDivElement>(null); // 무한스크롤 감지용
@@ -53,6 +52,7 @@ export default function GalleryPage() {
     observer.observe(observerTarget.current);
     return () => observer.disconnect();
   }, [device, mobileItems.length, loadMoreItems]);
+  
 
   if (!device) return null;
 
