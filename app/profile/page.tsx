@@ -96,7 +96,7 @@ export default function Profile() {
           {/* 컨텐츠 */}
           <div className="content-area">
             <div className="content-body">
-            {activeMenu === 'QWER' && <QWERSection />}
+              {activeMenu === 'QWER' && <QWERSection />}
               {activeMenu === 'Chodan' && <ChodanSection />}
               {activeMenu === 'Majenta' && <MajentaSection />}
               {activeMenu === 'Hina' && <HinaSection />}

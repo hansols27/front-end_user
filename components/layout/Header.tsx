@@ -28,7 +28,11 @@ export default function Header() {
     setMounted(true); 
   }, []);
 
-  const currentMenu = menuItems.find(item => item.path === pathname)?.name || 'Home';
+  const currentMenu = menuItems.find(item => {
+    if (item.path === '/') return pathname === '/';
+    return pathname.startsWith(item.path);
+  })?.name || 'Home';
+
   if (!mounted) return null;
   const isLoggedIn = !!user;
 
