@@ -9,9 +9,9 @@ import Tab from '@/components/common/Tab';
 import ConfirmAlert from '@/components/common/ConfirmAlert';
 import Button from '@/components/common/Button';
 import SideLayout from '@/components/layout/SideLayout';
-import MyInfoSection from '@/components/section/MyInfoSection';
-import MyPostsSection from '@/components/section/MyPostsSection';
-import MyCommentsSection from '@/components/section/MyCommentsSection';
+import MyInfoSection from '@/app/mypage/MyInfoSection';
+import MyPostsSection from '@/app/mypage/MyPostsSection';
+import MyCommentsSection from '@/app/mypage/MyCommentsSection';
 import { useDevice } from '@/hooks/useDevice';
 
 export default function MyPage() {
@@ -107,7 +107,7 @@ export default function MyPage() {
           </nav>
 
           {/* Content */}
-          <div className="mypage-content-area">
+          <div className="content-area">
             <div className="content-title">{activeMenu}</div>
             <div className="content-body">
               {activeMenu === '내 정보' && <MyInfoSection user={user} />}
@@ -152,7 +152,7 @@ export default function MyPage() {
           />
 
           {/* 모바일 ConfirmAlert는 버튼 크기 PC 유지 */}
-          <div className="mo-content-footer">
+          <div className="mo-content-footer ">
             <Button
               variant="black"
               size="md"

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import UserInfo from '@/components/common/UserInfo';
-import Button from '../common/Button';
+import Button from '../../components/common/Button';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useDevice } from '@/hooks/useDevice';
 

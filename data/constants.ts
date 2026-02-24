@@ -79,3 +79,29 @@ export const CATEGORY_OPTIONS = [
         'https://cdn.pixabay.com/photo/2017/06/13/12/54/profile-2398782_1280.png',
     },
   ];
+
+  export const chodanSNS = [
+    { name: 'cafe', src: '/icons/cafe.svg', url: 'https://cafe.naver.com/eggkim' },
+    { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
+    { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
+    { name: 'youtube', src: '/icons/youtube.svg', url: 'https://www.youtube.com/channel/UCgD0APk2x9uBlLM0UsmhQjw' },
+  ];
+
+  export const majentaSNS = [
+    { name: 'cafe', src: '/icons/cafe.svg', url: 'https://cafe.naver.com/eggkim' },
+    { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
+    { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
+    { name: 'youtube', src: '/icons/youtube.svg', url: 'https://www.youtube.com/channel/UCgD0APk2x9uBlLM0UsmhQjw' },
+  ];
+
+  export const hinaSNS = [
+    { name: 'cafe', src: '/icons/cafe.svg', url: 'https://cafe.naver.com/eggkim' },
+    { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
+    { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
+    { name: 'youtube', src: '/icons/youtube.svg', url: 'https://www.youtube.com/channel/UCgD0APk2x9uBlLM0UsmhQjw' },
+  ];
+
+  export const siyeonSNS = [
+    { name: 'instagram', src: '/icons/instagram.svg', url: 'https://www.instagram.com/qwerband_official/' },
+    { name: 'tiktok', src: '/icons/tiktok.svg', url: 'https://www.tiktok.com/@qwerband_official' },
+  ];

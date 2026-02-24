@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import TermsSection from '@/components/section/TermsSection';
+import TermsSection from '@/app/login/TermsSection';
 import { socialLogins } from '@/data/constants';
 
 export default function LoginPage() {
