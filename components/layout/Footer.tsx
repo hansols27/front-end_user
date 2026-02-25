@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { Collapse } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
 import Select from '@/components/common/Select';
-import { languageOptions } from '@/data/constants';
-import { snsIcons } from '@/data/constants';
+import { languageOptions } from '@/data/category';
+import { snsIcons } from '@/data/SNS';
 import { useDevice } from '@/hooks/useDevice';
 
 export default function Footer() {

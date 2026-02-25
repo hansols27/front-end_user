@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Button from '@/components/common/Button';
-import { TERMS } from '@/data/constants';
+import { TERMS } from '@/data/item';
 
 interface TermsSectionProps {
   onComplete: () => void;

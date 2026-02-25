@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import UserInfo from "@/components/common/UserInfo";
 import ConfirmAlert from '@/components/common/ConfirmAlert';
-import { menuItems } from '@/data/constants';
+import { menuItems } from '@/data/item';
 import { useDevice } from '@/hooks/useDevice';
 
 export default function Header() {

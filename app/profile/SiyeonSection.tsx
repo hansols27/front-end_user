@@ -1,7 +1,7 @@
 'use client';
 
 import { useDevice } from '@/hooks/useDevice';
-import { siyeonSNS } from '@/data/constants';
+import { siyeonSNS } from '@/data/SNS';
 import Image from 'next/image';
 
 export default function MajentaSection() {

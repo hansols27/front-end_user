@@ -1,7 +1,7 @@
 'use client';
 
 import { useDevice } from '@/hooks/useDevice';
-import { chodanSNS } from '@/data/constants';
+import { chodanSNS } from '@/data/SNS';
 import Image from 'next/image';
 
 export default function ChodanSection() {

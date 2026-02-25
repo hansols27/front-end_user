@@ -5,7 +5,7 @@ import { Pagination as MuiPagination } from '@mui/material';
 import Input from '@/components/common/Input';
 import Select from '@/components/common/Select';
 import Card from '@/components/common/Card'; 
-import { CATEGORY_OPTIONS, getCategoryLabel } from '@/data/constants';
+import { Community_category, getCommunity_category } from '@/data/category';
 import Button from '@/components/common/Button';
 import { useDevice } from '@/hooks/useDevice';
 
@@ -61,7 +61,7 @@ export default function MyCommentsSection() {
           <Select 
             device={device}
             label="구분"
-            options={CATEGORY_OPTIONS}
+            options={Community_category}
             value={category}
             onChange={(e) => {
               setCategory(e.target.value);
@@ -100,7 +100,7 @@ export default function MyCommentsSection() {
             <Card
               key={i}
               device={device}
-              category={getCategoryLabel(category)} 
+              category={getCommunity_category(category)} 
               title={`내가 작성한 게시글 ${startIndex + i + 1}`}
               date="2026.01.20"
               author="원글작성자" 
@@ -130,7 +130,7 @@ export default function MyCommentsSection() {
           <Select 
             device="pc"
             label="구분"
-            options={CATEGORY_OPTIONS} 
+            options={Community_category} 
             value={category} 
             onChange={(e) => {
               setCategory(e.target.value);
@@ -155,7 +155,7 @@ export default function MyCommentsSection() {
             <Card
               key={i}
               device={device}
-              category={getCategoryLabel(category)} 
+              category={getCommunity_category(category)} 
               title={`모바일 게시글 ${startIndex + i + 1}`}
               date="2026.01.20"
               author="작성자" 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useDevice } from '@/hooks/useDevice';
-import { majentaSNS } from '@/data/constants';
+import { majentaSNS } from '@/data/SNS';
 import Image from 'next/image';
 
 export default function MagentaSection() {

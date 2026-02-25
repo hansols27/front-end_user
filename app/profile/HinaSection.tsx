@@ -1,7 +1,7 @@
 'use client';
 
 import { useDevice } from '@/hooks/useDevice';
-import { hinaSNS } from '@/data/constants';
+import { hinaSNS } from '@/data/SNS';
 import Image from 'next/image';
 
 export default function MajentaSection() {
