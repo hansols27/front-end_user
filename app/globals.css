@@ -61,7 +61,7 @@
 @layer base {
   body { 
     font-family: var(--font-main); 
-    @apply m-0 p-0 bg-black text-white;
+    @apply m-0 p-0;
     -webkit-tap-highlight-color: transparent; 
   }
 
@@ -425,25 +425,26 @@
 
   /* [공통] 서브 페이지 기본 레이아웃 엔진 */
   .sub-page-layout {
-    @apply w-full min-h-screen bg-black text-white max-w-[1920px] flex flex-col;
+    @apply w-full min-h-screen flex flex-col bg-black text-white;
   
     /* ===============================
        PC CONTENT (공통 레이아웃 엔진)
     =============================== */
     .pc-content {
-      @apply hidden lg:grid flex-1 bg-black;
+      @apply hidden lg:grid max-w-[1920px] flex-1;
       grid-template-columns: 140px minmax(0, 1fr) 140px; /* 좌140 / 중앙 유동 / 우140 */
       column-gap: 0; /* LNB ↔ 중앙 ↔ 우측 간격 제거 */
       padding-top: 80px;
       padding-bottom: 80px;
       min-width: 0; /* 중앙 콘텐츠 overflow 안정화 */
+      background-color: transparent;
     }
   
     /* ===============================
        MOBILE CONTENT
     =============================== */
     .mo-content {
-      @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-(--color-bg);
+      @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px];
     }
   
     /* ===============================
