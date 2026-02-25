@@ -6,10 +6,10 @@
   --color-white: #FFFFFF;
   --color-gray-sub: #999999;
   --color-border: #EEEEEE;
-  --color-qwer-chodan: #FFFFFF;
-  --color-qwer-magenta: #ff4edb;
-  --color-qwer-hina: #00a8ff;
-  --color-qwer-siyeon: #00c853;
+  --color-chodan: #FFFFFF;
+  --color-magenta: #ff4edb;
+  --color-hina: #00a8ff;
+  --color-siyeon: #00c853;
 
   /* [2] 공통 수치 변수 */
   --radius-base: 8px;
@@ -23,10 +23,10 @@
   --color-border-light: var(--color-border);
   --color-gray-sub: var(--color-gray-sub);
   --font-main: "Pretendard", sans-serif;
-  --color-qwer-chodan: var(--color-qwer-chodan);
-  --color-qwer-magenta: var(--color-qwer-magenta);
-  --color-qwer-hina: var(--color-qwer-hina);
-  --color-qwer-siyeon: var(--color-qwer-siyeon);
+  --color-chodan: var(--color-chodan);
+  --color-magenta: var(--color-magenta);
+  --color-hina: var(--color-hina);
+  --color-siyeon: var(--color-siyeon);
   
   /* Typography System: Tailwind v4 유틸리티 자동 생성 */
   --text-h1: 40px;
@@ -61,7 +61,7 @@
 @layer base {
   body { 
     font-family: var(--font-main); 
-    @apply m-0 p-0;
+    @apply m-0 p-0 bg-black text-white;
     -webkit-tap-highlight-color: transparent; 
   }
 
@@ -83,7 +83,7 @@
      [1] HEADER SYSTEM
   ============================================================ */
   .header-wrapper {
-    @apply w-full bg-black text-white sticky top-0 z-50 flex items-center justify-between;
+    @apply w-full border-b border-white bg-black text-white sticky top-0 z-50 flex items-center justify-between;
     @apply p-[20px_35px] lg:p-[30px_140px];
   }
 
@@ -153,7 +153,7 @@
   .user-info-comp {
     & .profile-img-wrapper { @apply relative inline-block shrink-0; }
     & .profile-img { @apply rounded-full object-cover border border-gray-100 w-full h-full; }
-    & .nickname { @apply font-bold text-black; }
+    & .nickname { @apply font-bold text-white; }
   }
 
   .header-wrapper .user-info-comp .nickname,
@@ -163,7 +163,7 @@
   .user-size-header { @apply gap-[10px]; & .profile-img-wrapper { @apply w-[40px] h-[40px]; } & .nickname { @apply text-h3; } }
   .user-size-mypage-pc { @apply gap-[20px]; & .profile-img-wrapper { @apply w-[80px] h-[80px]; } & .nickname { @apply text-h3; } }
   .user-size-mypage-mo { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[60px] h-[60px]; } & .nickname { @apply text-h4; } }
-  .user-size-mypage { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[100px] h-[100px]; } & .nickname { @apply text-h2; } }
+  .user-size-mypage { @apply gap-[15px]; & .profile-img-wrapper { @apply w-[100px] h-[100px]; } & .nickname { @apply text-h2 text-black; } }
 
   .camera-badge {
     @apply absolute right-0 bottom-0 flex items-center justify-center
@@ -193,11 +193,11 @@
   }
 
   .pc-infobox .pc-infoitem .infolabel {
-    @apply text-h5 text-black/40 font-medium;
+    @apply text-h5 text-white font-medium;
   }
 
   .pc-infobox .pc-infoitem .infodata {
-    @apply text-h4 text-black font-bold;
+    @apply text-h4 text-white font-bold;
   }
 
   /* 1280px 이하 → 2 × 2 */
@@ -217,10 +217,10 @@
       @apply flex flex-col items-start w-full gap-[5px]; 
 
       .infolabel {
-        @apply text-h6 text-black/40 font-medium;
+        @apply text-h6 text-white font-medium;
       }
       .infodata {
-        @apply text-h5 text-black font-bold;
+        @apply text-h5 text-white font-bold;
       }
     }
   }
@@ -229,7 +229,7 @@
      [3] FOOTER SYSTEM
   ============================================================ */
   .footer-wrapper {
-    @apply w-full bg-black text-white flex flex-col p-[20px_35px] z-50 lg:p-[40px_140px];
+    @apply w-full border-t border-white bg-black text-white flex flex-col p-[20px_35px] z-50 lg:p-[40px_140px];
 
     .footer-container {
        @apply flex flex-col lg:flex-row lg:justify-between lg:items-start mb-[15px] lg:mb-[20px] w-full; 
@@ -311,8 +311,9 @@
   .btn-lg { @apply text-h4 h-[50px] px-6; }
   .btn-md { @apply text-h5 h-[40px] px-4; }
   .btn-sm { @apply text-h6 h-[30px] px-3; }
-  .btn-blue { @apply bg-qwer-hina text-white border-none hover:brightness-110; }
-  .btn-black { @apply bg-white text-black border border-black hover:bg-gray-50; }
+  .btn-blue { @apply bg-hina text-white border-none hover:brightness-110; }
+  .btn-black { @apply bg-white text-black border border-black; }
+  .btn-white { @apply bg-black text-white border border-white; }
 
   .input-base, .select-base {
     @apply appearance-none flex items-center px-[15px] outline-none w-full
@@ -322,7 +323,7 @@
 
   .input-pc, .select-pc { @apply text-h5 h-[40px]; }
   .input-mo, .select-mo { @apply text-h6 h-[30px]; }
-  .input-style, .select-style { @apply focus:border-qwer-hina focus:ring-1 focus:ring-qwer-hina; }
+  .input-style, .select-style { @apply focus:border-hina focus:ring-1 focus:ring-hina; }
 
   .input-search {
     @apply pr-[45px];
@@ -370,11 +371,11 @@
 
   /* line */
   .tab-line {
-    @apply text-black;
+    @apply text-white;
   }
 
   .tab-line-active {
-    @apply text-black font-bold relative;
+    @apply text-white font-bold relative;
   }
   .tab-line-active::after {
     content: '';
@@ -383,37 +384,37 @@
 
   /* box */
   .tab-box {
-    @apply border border-black text-black;
+    @apply border border-white bg-black text-white;
   }
 
   .tab-box-active {
-    @apply border border-black bg-black text-white;
+    @apply bg-white text-black border-white font-bold;
   }
 
-  .card-list, .noti-card { @apply flex flex-col w-full bg-white text-black border border-black p-5 gap-[10px] rounded-base transition-(--transition-base); }
+  .card-list, .noti-card { @apply flex flex-col w-full bg-white text-black border border-gray-sub p-5 gap-[10px] rounded-base transition-(--transition-base); }
 
   .tag-author-base { @apply text-h6 inline-flex items-center justify-center text-white px-2 rounded-[4px] h-[20px] leading-none; }
-  .tag-author-comment { @apply bg-qwer-siyeon; }
-  .tag-author-reply { @apply bg-qwer-hina; }
+  .tag-author-comment { @apply bg-siyeon; }
+  .tag-author-reply { @apply bg-hina; }
 
   .btn-social { 
     @apply w-full flex items-center justify-center gap-[15px] rounded-[8px] font-bold h-[50px] max-w-[480px] transition-all; 
   }
   .btn-naver { 
-    @apply bg-[#03C75A] text-white hover:bg-[#02b351]; 
+    @apply bg-[#03C75A] text-white; 
   }
   .btn-kakao { 
-    @apply bg-[#FEE500] text-[#191919] hover:bg-[#fada00]; 
+    @apply bg-[#FEE500] text-[#191919]; 
   }
   .btn-google { 
-    @apply bg-[#F2F2F2] text-black border border-[#DDDDDD] hover:bg-[#EAEAEA]; 
+    @apply bg-[#F2F2F2] text-black border border-[#DDDDDD]; 
   }
   
   .alert-overlay { @apply fixed inset-0 z-200 flex items-center justify-center bg-black/60; }
-  .alert-box { @apply bg-white border border-black rounded-[8px] flex flex-col items-center min-w-[320px] p-[10px] lg:p-[20px]; }
+  .alert-box { @apply text-black bg-white border border-gray-sub rounded-[8px] flex flex-col items-center min-w-[320px] p-[10px] lg:p-[20px]; }
 
   .more-menu {
-    @apply absolute top-[calc(100%+12px)] right-0 border border-(--color-gray-sub)/20 rounded-[4px] min-w-[100px] z-100 py-[10px] px-[5px] gap-[5px];
+    @apply absolute top-[calc(100%+12px)] right-0 border border-gray-sub/20 rounded-[4px] min-w-[100px] z-100 py-[10px] px-[5px] gap-[5px];
     @apply bg-white;
 
     .menu-item {      
@@ -424,13 +425,13 @@
 
   /* [공통] 서브 페이지 기본 레이아웃 엔진 */
   .sub-page-layout {
-    @apply w-full min-h-screen bg-white text-black max-w-[1920px] flex flex-col;
+    @apply w-full min-h-screen bg-black text-white max-w-[1920px] flex flex-col;
   
     /* ===============================
        PC CONTENT (공통 레이아웃 엔진)
     =============================== */
     .pc-content {
-      @apply hidden lg:grid flex-1 bg-white;
+      @apply hidden lg:grid flex-1 bg-black;
       grid-template-columns: 140px minmax(0, 1fr) 140px; /* 좌140 / 중앙 유동 / 우140 */
       column-gap: 0; /* LNB ↔ 중앙 ↔ 우측 간격 제거 */
       padding-top: 80px;
@@ -442,7 +443,7 @@
        MOBILE CONTENT
     =============================== */
     .mo-content {
-      @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-white;
+      @apply flex lg:hidden flex-col w-full flex-1 px-[35px] py-[40px] bg-(--color-bg);
     }
   
     /* ===============================
@@ -492,7 +493,7 @@
         }
   
         .line {
-          @apply w-px h-[180px] bg-black opacity-30;
+          @apply w-px h-[180px] bg-white;
         }
   
         .text {
@@ -510,7 +511,7 @@
 
   /* --- 3. 마이페이지 내부 LNB 및 컨텐츠 세부 스타일 --- */
   .lnb-wrapper {
-    @apply flex flex-col w-[200px] shrink-0 border rounded-[12px] border-black py-[40px] px-[20px] gap-[20px];
+    @apply flex flex-col w-[200px] shrink-0 border rounded-[12px] bg-white border-gray-sub py-[40px] px-[20px] gap-[20px];
 
     align-self: flex-start;
     height: fit-content;
@@ -526,7 +527,7 @@
     span { @apply text-h4 font-medium text-black/60; }
     &.active span { @apply text-black font-bold; }
     
-    .icon-arrow { @apply w-[20px] h-[20px] opacity-20; }
+    .icon-arrow { @apply w-[20px] h-[20px] text-black; }
     &.active .icon-arrow { @apply opacity-100; }
   }
   
@@ -539,7 +540,7 @@
     @apply flex-1 ml-0 mr-0 lg:ml-[80px] lg:mr-[80px];
     
     .content-title {
-      @apply text-h3 font-bold text-black border-b-2 border-black pb-[20px] mb-[40px];
+      @apply text-h3 font-bold text-white border-b-2 border-white pb-[20px] mb-[40px];
     }
   }
 
@@ -550,17 +551,14 @@
   /* MUI Pagination 커스텀 스타일 */
   .MuiPagination-root .MuiPaginationItem-root {
     border-radius: 0px !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     font-family: inherit;
-  }
-
-  .MuiPagination-root .MuiPaginationItem-root.Mui-selected {
-    background-color: #000 !important;
     color: #fff !important;
   }
 
-  .MuiPagination-root .MuiPaginationItem-root.Mui-selected:hover {
-    background-color: #333 !important;
+  .MuiPagination-root .MuiPaginationItem-root.Mui-selected {
+    background-color: #fff!important;
+    color: #000  !important;
   }
 
   .sns-list { 

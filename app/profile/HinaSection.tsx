@@ -15,8 +15,8 @@ export default function MajentaSection() {
       <div className="flex flex-row items-end">
         {/* 이미지 영역: 475x555 비율 및 그림자 */}
         <div 
-          className="relative w-[475px] h-[555px] bg-gray-200 shrink-0"
-          style={{ boxShadow: '15px 15px 0px 0px #00a8ff' }} 
+          className="relative rounded-[8px] w-[475px] h-[555px] bg-gray-200 shrink-0"
+          style={{ boxShadow: '10px 10px 0px 0px var(--color-hina)' }} 
         >
           <img 
             src="/images/your-image.png" 
@@ -36,7 +36,7 @@ export default function MajentaSection() {
             </div>           
           </div>
            {/* 1. 40px 하단 여백 후 라인 */}
-           <div className="mt-[40px] w-full h-px bg-black" />
+           <div className="mt-[40px] w-full h-px bg-white" />
 
             {/* 2. 라인에서 40px 하단 여백 후 SNS 목록 */}
             <div className="mt-[40px] sns-list">
@@ -68,8 +68,8 @@ export default function MajentaSection() {
       <div className="flex flex-col w-full py-[20px]">
         {/* 이미지 영역 */}        
           <div
-            className="relative w-full aspect-475/555 bg-gray-200 mx-auto"
-            style={{ boxShadow: '10px 10px 0px 0px #00a8ff' }}
+            className="relative rounded-[8px] w-full aspect-475/555 bg-gray-200 mx-auto"
+            style={{ boxShadow: '10px 10px 0px 0px var(--color-hina)' }}
           >
             <img
               src="/images/your-image.png"

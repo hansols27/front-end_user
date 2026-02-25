@@ -59,7 +59,7 @@ export default function DiscographyDetailPage({ params }: { params: { id: string
             {/* 앨범 이미지: 40px 아래, Radius 12px, x:15 y:15 연한 회색 그림자 */}
             <div 
               className="relative w-full aspect-square rounded-[12px] bg-gray-100 overflow-hidden shrink-0"
-              style={{ boxShadow: '15px 15px 0px 0px rgba(220, 220, 220, 1)' }}
+              style={{ boxShadow: '10px 10px 0px 0px var(--color-gray-sub)' }}
             >
               <img 
                 src={album.coverImage} 
@@ -70,7 +70,7 @@ export default function DiscographyDetailPage({ params }: { params: { id: string
 
             {/* 일자 및 트랙리스트: 40px 아래, 텍스트 왼쪽 정렬, 간격 20px */}
             <div className="mt-[40px] flex flex-col text-left">
-              <span className="text-h4 text-gray-500 font-medium">{album.date}</span>
+              <span className="text-h4 text-white font-medium">{album.date}</span>
               <div className="mt-[20px] flex flex-wrap gap-x-[20px] gap-y-[10px]">
                 {album.tracks.map((track, i) => (
                   <p key={i} className="text-h5 font-bold whitespace-nowrap break-keep">{track}</p>
@@ -84,8 +84,8 @@ export default function DiscographyDetailPage({ params }: { params: { id: string
             {/* 타이틀 그룹: 타이틀, 설명, 앨범 소개 간격 20px */}
             <div className="flex flex-col gap-[20px]">
               <h1 className="text-h2 font-bold">{album.title}</h1>
-              <p className="text-h4 text-gray-700 font-medium">{album.description}</p>
-              <div className="text-h5 text-gray-600 leading-relaxed whitespace-pre-line">
+              <p className="text-h4 text-white font-medium">{album.description}</p>
+              <div className="text-h5 text-white leading-relaxed whitespace-pre-line">
                 {album.info}
               </div>
             </div>

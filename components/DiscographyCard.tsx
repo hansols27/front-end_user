@@ -40,12 +40,12 @@ export default function DiscographyCard({ title, date, src, onClick }: Discograp
       <div className="mt-[10px] lg:mt-[20px] flex flex-col w-full gap-[5px] lg:gap-[10px]">
         {/* 1단: 좌측 타이틀 */}
         <div className="flex justify-start">
-          <span className="text-h4 font-bold text-black truncate">{title}</span>
+          <span className="text-h4 font-bold text-white truncate">{title}</span>
         </div>
         
         {/* 2단: 우측 일자 */}
         <div className="flex justify-end">
-          <span className="text-h4 text-gray-500">{date}</span>
+          <span className="text-h4 text-white">{date}</span>
         </div>
       </div>
     </div>

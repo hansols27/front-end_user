@@ -39,7 +39,7 @@ export default function MyInfoSection({ user }: MyInfoSectionProps) {
                 type="text"
                 value={tempNickname}
                 onChange={(e) => setTempNickname(e.target.value)}
-                className="bg-transparent border-b border-black outline-none text-h3 font-bold pb-1 w-[140px]"
+                className="bg-transparent border-b border-white outline-none text-h3 font-bold pb-1 w-[140px]"
               />
               <Button 
                 variant="black" 
@@ -53,7 +53,7 @@ export default function MyInfoSection({ user }: MyInfoSectionProps) {
 
           {/* 오른쪽: 알림 영역 아이콘 + 텍스트 가로 배열 */}
           <div className="flex flex-row items-center gap-[10px] cursor-pointer">
-            <NotificationsIcon className="text-black w-[30px] h-[30px]" />
+            <NotificationsIcon className="text-white w-[30px] h-[30px]" />
             <div className="flex flex-row items-center gap-[5px] text-h4 font-medium">
               <span>알림</span>
               <span className="font-bold">{user?.unreadCount || 0}</span>
@@ -103,7 +103,7 @@ export default function MyInfoSection({ user }: MyInfoSectionProps) {
                 type="text"
                 value={tempNickname}
                 onChange={(e) => setTempNickname(e.target.value)}
-                className="bg-transparent border-b border-black outline-none text-h5 font-bold w-[100px]"
+                className="bg-transparent border-b border-white outline-none text-h5 font-bold w-[100px]"
                 autoFocus
               />
               
@@ -119,7 +119,7 @@ export default function MyInfoSection({ user }: MyInfoSectionProps) {
 
           {/* 모바일 알림부 */}
           <div className="flex flex-row items-center gap-[5px]">
-            <NotificationsIcon className="text-black w-[20px] h-[20px]" />
+            <NotificationsIcon className="text-white w-[20px] h-[20px]" />
             <div className="flex flex-row items-center gap-[5px] text-h5">
               <span>알림</span>
               <span>{user?.unreadCount || 0}</span>

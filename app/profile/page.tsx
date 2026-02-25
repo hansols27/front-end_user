@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import SideLayout from '@/components/layout/SideLayout';
 import QWERSection from '@/app/profile/QWERSection';
 import ChodanSection from '@/app/profile/ChodanSection';
-import MajentaSection from '@/app/profile/MajentaSection';
+import MagentaSection from '@/app/profile/MagentaSection';
 import HinaSection from '@/app/profile/HinaSection';
 import SiyeonSection from '@/app/profile/SiyeonSection';
 import { useDevice } from '@/hooks/useDevice';
@@ -17,7 +17,7 @@ export default function Profile() {
   const [activeMenu, setActiveMenu] = useState('QWER');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const menus = ['QWER', 'Chodan', 'Majenta', 'Hina', 'Siyeon'];
+  const menus = ['QWER', 'Chodan', 'Magenta', 'Hina', 'Siyeon'];
 
   // -------------------------------
   // Redirect 안정화 (logout / withdraw 후)
@@ -61,7 +61,7 @@ export default function Profile() {
             <div className="content-body">
               {activeMenu === 'QWER' && <QWERSection />}
               {activeMenu === 'Chodan' && <ChodanSection />}
-              {activeMenu === 'Majenta' && <MajentaSection />}
+              {activeMenu === 'Magenta' && <MagentaSection />}
               {activeMenu === 'Hina' && <HinaSection />}
               {activeMenu === 'Siyeon' && <SiyeonSection />}
             </div>
@@ -98,7 +98,7 @@ export default function Profile() {
             <div className="content-body">
               {activeMenu === 'QWER' && <QWERSection />}
               {activeMenu === 'Chodan' && <ChodanSection />}
-              {activeMenu === 'Majenta' && <MajentaSection />}
+              {activeMenu === 'Magenta' && <MagentaSection />}
               {activeMenu === 'Hina' && <HinaSection />}
               {activeMenu === 'Siyeon' && <SiyeonSection />}
             </div>

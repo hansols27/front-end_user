@@ -13,8 +13,8 @@ export default function QWERSection() {
       <div className="flex flex-row items-end">
         {/* 이미지 영역: 475x555 비율 및 그림자 */}
         <div 
-          className="relative w-[475px] h-[555px] bg-gray-200 shrink-0"
-          style={{ boxShadow: '15px 15px 0px 0px rgba(0, 0, 0, 1)' }} // x:15, y:15 블랙 그림자
+          className="relative rounded-[8px] w-[475px] h-[555px] bg-gray-200 shrink-0"
+          style={{ boxShadow: '10px 10px 0px 0px var(--color-gray-sub)' }} 
         >
           <img 
             src="/images/your-image.png" 
@@ -41,15 +41,12 @@ export default function QWERSection() {
   if (device === "mo") {
     return (
       <div className="flex flex-col w-full py-[20px]">
-        {/* 이미지 영역: 
-           1. w-full로 부모 여백(35px)을 제외한 나머지를 꽉 채움
-           2. aspect-ratio를 직접 스타일로 주어 475:555 비율 유지
-        */}
+       
         <div 
-          className="relative w-full bg-gray-200 shrink-0"
+          className="relative rounded-[8px] w-full bg-gray-200 shrink-0"
           style={{ 
             aspectRatio: '475 / 555',
-            boxShadow: '10px 10px 0px 0px rgba(0, 0, 0, 1)' 
+            boxShadow: '10px 10px 0px 0px var(--color-gray-sub)' 
           }}
         >
           <img 
