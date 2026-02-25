@@ -570,5 +570,80 @@
       img, svg { @apply w-full h-full object-contain; } 
     }
   }
+
+  /* 스케줄 메인 컨테이너 */
+  .schedule-container {
+    @apply flex flex-col lg:flex-row lg:gap-[80px] gap-[40px] w-full;
+  }
+
+  /* 1단: 일정 상세 영역 */
+  .schedule-detail {
+    @apply flex-1 flex flex-col items-start;
+
+    .selected-date {
+      @apply text-h2 font-bold text-white;
+      /* PC 20px, MO 10px 간격 */
+      @apply mb-[10px] lg:mb-[20px];
+    }
+
+    .divider {
+      @apply w-full h-px bg-white opacity-30;
+      /* PC 20px, MO 10px 간격 */
+      @apply mb-[10px] lg:mb-[20px];
+    }
+
+    .schedule-content {
+      @apply text-h4 text-gray-sub leading-relaxed text-left;
+    }
+  }
+
+  /* 2단: 캘린더 영역 */
+  .calendar-section {
+    @apply w-full lg:w-[450px] shrink-0;
+
+    .calendar-header {
+      @apply flex items-center justify-between mb-5;
+      
+      .year-month-select {
+        @apply flex items-center gap-2 text-h3 font-bold text-white;
+      }
+      
+      .nav-buttons {
+        @apply flex items-center gap-4;
+        .icon-arrow { @apply w-6 h-6 cursor-pointer hover:text-hina transition-colors; }
+      }
+    }
+  }
+
+  /* MUI DatePicker 다크 모드 커스텀 */
+  .MuiPopover-root .MuiPaper-root {
+    background-color: #111 !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-image: none !important; /* MUI 기본 그림자 레이어 제거 */
+  }
+
+  /* 연도 버튼 스타일 */
+  .MuiPickersYear-yearButton {
+    color: #fff !important;
+  }
+
+  /* 월 버튼 스타일 */
+  .MuiPickersMonth-monthButton {
+    color: #fff !important;
+  }
+
+  /* 선택된 상태 (연/월 공통) */
+  .MuiPickersYear-yearButton.Mui-selected,
+  .MuiPickersMonth-monthButton.Mui-selected {
+    background-color: var(--color-hina) !important;
+    color: #000 !important; /* 선택됐을 때 글자색 (취향에 따라 조정) */
+  }
+
+  /* 호버 스타일 */
+  .MuiPickersYear-yearButton:hover,
+  .MuiPickersMonth-monthButton:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 

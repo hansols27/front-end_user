@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SideLayout from '@/components/layout/SideLayout';
 import { useDevice } from '@/hooks/useDevice';
-import DiscographyCard from '@/components/DiscographyCard';
+import DiscographyCard from '@/app/discography/DiscographyCard';
 
 // 임시 데이터 (나중에 constants로 분리하세요)
 const ALBUM_LIST = Array.from({ length: 8 }).map((_, i) => ({
