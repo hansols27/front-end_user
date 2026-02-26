@@ -39,13 +39,13 @@ export default function DiscographyPage() {
         <div className="w-full">
             <div className="grid grid-cols-4 gap-x-[20px] gap-y-[60px]">
                 {ALBUM_LIST.map((album) => (
-                <DiscographyCard
-                    key={album.id}
-                    title={album.title}
-                    date={album.date}
-                    src={album.src}
-                    onClick={() => router.push(`/discography/${album.id}`)}
-                />
+                  <DiscographyCard
+                      key={album.id}
+                      title={album.title}
+                      date={album.date}
+                      src={album.src}
+                      onClick={() => router.push(`/discography/${album.id}`)}
+                  />
                 ))}
             </div>
         </div>

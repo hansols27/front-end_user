@@ -107,6 +107,7 @@ export default function MyPostsSection() {
               category={getCommunity_category(category)}
               title={`내가 작성한 게시글 ${startIndex + i + 1}`}
               date="2026.01.20"
+              onClick={() => console.log('원문 이동')}
             />
           ))}
         </div>
@@ -163,6 +164,7 @@ export default function MyPostsSection() {
               category={getCommunity_category(category)}
               title={`모바일 게시글 ${startIndex + i + 1}`}
               date="2026.01.20"
+              onClick={() => console.log('원문 이동')}
             />
           ))}
         </div>

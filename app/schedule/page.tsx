@@ -41,7 +41,7 @@ export default function SchedulePage() {
 
   if (device === 'pc') {
     return (
-      <SideLayout num="02" title="Schedule">
+      <SideLayout num="05" title="Schedule">
         <div className="flex flex-row gap-[80px] items-start w-full">
           <ScheduleDetail selectedDate={selectedDate} scheduleContent={scheduleContent} />
           <CalendarSection {...commonProps} />
