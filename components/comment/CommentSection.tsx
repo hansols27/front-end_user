@@ -77,7 +77,7 @@ export default function CommentSection({ device, isLoggedIn }: CommentSectionPro
 
                 {/* 2. 댓글 직속 답글창 */}
                 {activeReplyId === comment.id && (
-                  <div className="mt-[20px] pl-[40px]">
+                  <div className="mt-[20px]">
                     <CommentInput 
                       device="pc" 
                       mode="write" 
