@@ -1,11 +1,14 @@
-import { useState } from "react";
+'use client';
+
+import { useState, ChangeEvent } from "react";
+import Button from "@/components/common/Button";
 
 interface CommentInputProps {
   device: "pc" | "mo";
-  mode?: "write" | "edit"; // 입력(write) 또는 수정(edit) 상태
+  mode?: "write" | "edit";
   initialValue?: string;
   placeholder?: string;
-  onCancel?: () => void; // 취소 버튼 (주로 수정 모드에서 사용)
+  onCancel?: () => void;
   onSubmit: (content: string) => void;
   className?: string;
 }
@@ -20,50 +23,82 @@ export default function CommentInput({
   className = "",
 }: CommentInputProps) {
   const [content, setContent] = useState(initialValue);
+  const MAX_LENGTH = 500;
 
-  // 1. 상태 클래스 매핑: write(회색 테두리) / edit(검정 테두리)
-  const statusClass = mode === "write" ? "state-write" : "state-edit";
-  
-  // 2. 해상도 타입 매핑: input-type-pc / input-type-mo
-  const typeClass = `input-type-${device}`;
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length <= MAX_LENGTH) {
+      setContent(e.target.value);
+    }
+  };
 
   const handleSubmit = () => {
     if (!content.trim()) return;
     onSubmit(content);
-    if (mode === "write") setContent(""); // 새 글 작성 시에만 초기화
+    if (mode === "write") setContent("");
   };
 
-  return (
-    <div className={`comment-input-wrapper ${statusClass} ${typeClass} ${className}`}>
-      {/* 내부 텍스트 영역 */}
-      <textarea
-        className="comment-textarea"
-        placeholder={placeholder}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      
-      {/* 하단 버튼 영역 */}
-      <div className="comment-input-footer">
-        {/* 수정 모드거나 취소 함수가 있을 때만 취소 버튼 노출 */}
-        {(mode === "edit" || onCancel) && (
-          <button 
-            type="button" 
-            onClick={onCancel} 
-            className="btn-comment-cancel btn-size"
-          >
-            취소
-          </button>
-        )}
+  /* =========================
+      PC 버전 (전체 H: 225px)
+  ========================= */
+  if (device === "pc") {
+    return (
+      <div className={`textarea-container ${className} h-[125px]`}>
+        <textarea
+          className="textarea-input text-h4"
+          placeholder={placeholder}
+          value={content}
+          onChange={handleChange}
+          maxLength={MAX_LENGTH}
+        />
         
-        <button 
-          type="button" 
-          onClick={handleSubmit} 
-          className="btn-comment-save btn-size"
-        >
-          {mode === "write" ? "등록" : "저장"}
-        </button>
+        {/* 간격 20px 적용 */}
+        <div className="textarea-footer mt-[20px]">
+          <div className="flex gap-[10px]">
+            {(mode === "edit" || onCancel) && (
+              <Button variant="black" size="md" onClick={onCancel} className="w-[100px]">
+                취소
+              </Button>
+            )}
+            <Button variant="black" size="md" onClick={handleSubmit} className="w-[100px]">
+              {mode === "write" ? "등록" : "저장"}
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  /* =========================
+      모바일 버전 (전체 H: 185px)
+  ========================= */
+  if (device === "mo") {
+    return (
+      <div className={`textarea-container ${className} h-[85px]`}>
+        <textarea
+          className="textarea-input text-h5"
+          placeholder={placeholder}
+          value={content}
+          onChange={handleChange}
+          maxLength={MAX_LENGTH}
+        />
+        
+        {/* 간격 10px 적용 */}
+        <div className="textarea-footer mt-[10px]">
+          
+          <div className="flex gap-[10px]">
+            {(mode === "edit" || onCancel) && (
+              <Button variant="black" size="sm" onClick={onCancel} className="w-[80px]">
+                취소
+              </Button>
+            )}
+            <Button variant="black" size="sm" onClick={handleSubmit} className="w-[80px]">
+              {mode === "write" ? "등록" : "저장"}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

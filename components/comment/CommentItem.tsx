@@ -1,5 +1,9 @@
+'use client';
+
 import React from 'react';
-import UserInfo from '../common/UserInfo'; // 앞서 만든 컴포넌트 임포트
+import UserInfo from '../common/UserInfo';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { IconButton } from '@mui/material';
 
 interface CommentItemProps {
   device: "pc" | "mo";
@@ -7,9 +11,9 @@ interface CommentItemProps {
   author: string;
   date: string;
   content: string;
-  isAuthor?: boolean; // 게시글 작성자 여부
+  isAuthor?: boolean;
   onReply?: () => void;
-  onMore?: () => void;
+  onMore?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function CommentItem({
@@ -22,44 +26,86 @@ export default function CommentItem({
   onReply,
   onMore,
 }: CommentItemProps) {
-  const sizeClass = `comment-size-${device}`;
+  
+  /* =========================
+      PC 버전
+  ========================= */
+  if (device === "pc") {
+    return (
+      <div className="comment-item comment-size-pc flex flex-col w-full gap-[15px]">
+        {/* [1단] 상단 정보 영역 */}
+        <div className="comment-info-row flex items-center justify-between w-full">
+          {/* 좌측: 유저정보 + 작성일 */}
+          <div className="comment-author-group flex items-center gap-[10px]">
+            <UserInfo 
+              size="comment" 
+              nickname={author} 
+              profileSrc={profileImg} 
+            />
+            <div className="comment-meta flex items-center gap-[10px]">
+              {isAuthor && <span className="tag-author-base tag-author-comment">작성자</span>}
+              <span className="comment-date text-h4 text-white">{date}</span>
+            </div>
+          </div>
 
-  return (
-    <div className={`comment-item ${sizeClass}`}>
-      {/* [1단] 상단 정보 영역 */}
-      <div className="comment-info-row">
-        <div className="comment-author-group">
-          {/* 공통 컴포넌트 UserInfo 활용: 댓글용(30*30) 사이즈 적용 */}
-          <UserInfo 
-            size="comment" 
-            nickname={author} 
-            profileSrc={profileImg} 
-          />
-          
-          {/* 메타 정보: 닉네임 바로 뒤에 배치 */}
-          <div className="comment-meta">
-            {isAuthor && <span className="tag-author-comment">작성자</span>}
-            <span className="comment-date">{date}</span>
+          {/* 우측: 답글쓰기 + 더보기 */}
+          <div className="comment-side-group flex items-center gap-[15px]">
+            <button type="button" onClick={onReply} className="btn-reply-write text-h5 text-white cursor-pointer">
+              답글쓰기
+            </button>
+            <IconButton onClick={onMore} size="small" sx={{ color: 'white', p: '4px' }}>
+              <MoreVertIcon fontSize="medium" />
+            </IconButton>
           </div>
         </div>
 
-        <div className="comment-side-group">
-          <button type="button" onClick={onReply} className="btn-reply-write">
-            답글쓰기
-          </button>
-          <button 
-            type="button" 
-            onClick={onMore} 
-            className="btn-comment-more" 
-            aria-label="더보기"
-          />
+        {/* [2단] 내용 영역 */}
+        <div className="comment-content text-h4 text-white leading-relaxed whitespace-pre-wrap">
+          {content}
         </div>
       </div>
+    );
+  }
 
-      {/* [2단] 내용 영역 */}
-      <div className="comment-content leading-relaxed text-black">
-        {content}
+  /* =========================
+      모바일 버전
+  ========================= */
+  if (device === "mo") {
+    return (
+      <div className="comment-item comment-size-mo flex flex-col w-full gap-[10px]">
+        {/* [1단] 상단 정보 영역 */}
+        <div className="comment-info-row flex items-center justify-between w-full">
+          {/* 좌측: 유저정보 + 작성일 */}
+          <div className="comment-author-group flex items-center gap-[10px]">
+            <UserInfo 
+              size="comment" 
+              nickname={author} 
+              profileSrc={profileImg} 
+            />
+            <div className="comment-meta flex items-center gap-[10px]">
+              {isAuthor && <span className="tag-author-base tag-author-comment">작성자</span>}
+              <span className="comment-date text-h5 text-white">{date}</span>
+            </div>
+          </div>
+
+          {/* 우측: 답글쓰기 + 더보기 */}
+          <div className="comment-side-group flex items-center gap-[10px]">
+            <button type="button" onClick={onReply} className="btn-reply-write text-h6 text-white">
+              답글쓰기
+            </button>
+            <IconButton onClick={onMore} size="small" sx={{ color: 'white', p: '2px' }}>
+              <MoreVertIcon fontSize="small" />
+            </IconButton>
+          </div>
+        </div>
+
+        {/* [2단] 내용 영역 */}
+        <div className="comment-content text-h5 text-white leading-relaxed whitespace-pre-wrap">
+          {content}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 }

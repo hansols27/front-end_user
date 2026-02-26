@@ -1,10 +1,13 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from 'next/navigation';
 import SideLayout from '@/components/layout/SideLayout';
 import { useDevice } from '@/hooks/useDevice';
 import Button from '@/components/common/Button';
 import { getCommunity_category } from '@/data/category';
+import { useAuth } from "@/context/AuthContext";
+import CommentSection from '@/components/comment/CommentSection'; 
 
 // 데이터 인터페이스 정의
 interface CommunityData {
@@ -20,9 +23,21 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
   const device = useDevice();
   const router = useRouter();
 
+  const { id } = useParams(); 
+
+  const [mounted, setMounted] = useState(false);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    setMounted(true); 
+  }, []);
+
+  if (!mounted) return null;
+  const isLoggedIn = !!user;
+
   // 임시 데이터 (album 변수명 유지)
   const community: CommunityData = {
-    id: params.id,
+    id: id as string,
     category: 'info',
     title: '공지사항 상세 페이지 제목입니다.',
     author: '관리자',
@@ -69,12 +84,13 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
             <div className="w-full h-px bg-white mt-[40px]" />
 
             {/* 목록 버튼 (우측 끝, 간격: PC 40px) */}
-            <div className="flex justify-end mt-[40px]">
+            <div className="flex justify-end mt-[40px] mb-[40px]">
               <Button variant="black" size="md" className="w-[120px]" onClick={handleGoList}>
                 목록
               </Button>
             </div>
-          </div>
+            <CommentSection device="pc" isLoggedIn={isLoggedIn} />
+          </div>          
         </div>
       </SideLayout>
     );
@@ -87,7 +103,7 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
     return (
       <main className="sub-page-layout">
         <div className="mo-content">
-          <div className="flex flex-col w-full px-5">
+          <div className="flex flex-col w-full">
             {/* 1단: 제목 */}
             <h1 className="text-h4 font-bold text-white">{community.title}</h1>
 
@@ -119,6 +135,7 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
               </Button>
             </div>
           </div>
+          <CommentSection device="mo" isLoggedIn={isLoggedIn} />
         </div>
       </main>
     );
