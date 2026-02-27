@@ -60,7 +60,7 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
         <div className="flex w-full gap-[80px] items-start">
           <div className="flex flex-col w-full">
             {/* 1단: 제목 */}
-            <h1 className="text-h3 font-bold text-white">{community.title}</h1>
+            <span className="text-h3 font-bold text-white">{community.title}</span>
 
             {/* 2단 그룹: 카테고리 / 작성자|작성일 (간격: PC 20px) */}
             <div className="flex items-center justify-between mt-[20px]">
@@ -105,7 +105,7 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
         <div className="mo-content">
           <div className="flex flex-col w-full">
             {/* 1단: 제목 */}
-            <h1 className="text-h4 font-bold text-white">{community.title}</h1>
+            <span className="text-h4 font-bold text-white">{community.title}</span>
 
             {/* 2단 그룹: 카테고리 / 작성자|작성일 (간격: MO 10px) */}
             <div className="flex items-center justify-between mt-[10px]">

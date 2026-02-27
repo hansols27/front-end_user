@@ -44,15 +44,17 @@ export default function CommentItem({
   }, []);
 
   const handleEditClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // 이벤트 전파 방지
+    e.stopPropagation(); 
     setIsEdit(true);
     setShowMenu(false);
   };
 
   const handleDeleteClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // 이벤트 전파 방지    
-      onDelete?.();
-      setShowMenu(false);    
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete();
+    }
+    setShowMenu(false);
   };
 
   const handleCancel = () => {
@@ -60,10 +62,10 @@ export default function CommentItem({
   };
 
   const handleSubmit = (newContent: string) => {
-    // 1. 부모의 데이터를 바꾸는 함수 실행
-    onEditSubmit?.(newContent); 
-    // 2. 수정 모드 종료 (부모가 리렌더링되면서 새로운 content가 내려옴)
-    setIsEdit(false); 
+    if (onEditSubmit) {
+      onEditSubmit(newContent); // 부모 상태 업데이트 호출
+    }
+    setIsEdit(false);           // 수정 모드 종료
   };
 
   const RenderMoreMenu = () => (
