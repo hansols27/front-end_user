@@ -42,7 +42,7 @@ export default function CommentInput({
   ========================= */
   if (device === "pc") {
     return (
-      <div className={`textarea-container ${className} h-[125px]`}>
+      <div className={`textarea-container ${className} h-[145px]`}>
         <textarea
           className="textarea-input text-h4"
           placeholder={placeholder}
@@ -52,7 +52,7 @@ export default function CommentInput({
         />
         
         {/* 간격 20px 적용 */}
-        <div className="textarea-footer mt-[20px]">
+        <div className="textarea-footer mt-[20px] mb-[10px]">
           <div className="flex gap-[10px]">
             {(mode === "edit" || onCancel) && (
               <Button variant="black" size="md" onClick={onCancel} className="w-[100px]">
@@ -73,7 +73,7 @@ export default function CommentInput({
   ========================= */
   if (device === "mo") {
     return (
-      <div className={`textarea-container ${className} h-[85px]`}>
+      <div className={`textarea-container ${className} h-[110px]`}>
         <textarea
           className="textarea-input text-h5"
           placeholder={placeholder}
@@ -83,8 +83,7 @@ export default function CommentInput({
         />
         
         {/* 간격 10px 적용 */}
-        <div className="textarea-footer mt-[10px]">
-          
+        <div className="textarea-footer mt-[10px] mb-[5px]">          
           <div className="flex gap-[10px]">
             {(mode === "edit" || onCancel) && (
               <Button variant="black" size="sm" onClick={onCancel} className="w-[80px]">
