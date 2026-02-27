@@ -678,5 +678,32 @@
   .MuiPickersMonth-monthButton:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
   }
+
+  /* CKEditor 커스텀 컨테이너 */
+  .custom-editor-wrapper {
+    @apply w-full text-black;
+  }
+
+  /* 에디터 높이 설정 (반응형) */
+  .custom-editor-wrapper .ck-editor__editable_inline {
+    @apply min-h-[480px] lg:min-h-[640px];
+  }
+
+  /* 본문 영역 스타일 */
+  .custom-editor-wrapper .ck.ck-editor__main > .ck-editor__editable {
+    /* !important 대신 클래스 앞에 !를 붙입니다 */
+    @apply bg-white text-[#333] border-[#ddd];
+  }
+
+  /* 툴바 스타일 */
+  .custom-editor-wrapper .ck-toolbar {
+    /* 마찬가지로 클래스 앞에 !를 붙여 우선순위를 높입니다 */
+    @apply bg-[#f9f9f9] border-b-[#ddd] border-t-0 border-x-0;
+  }
+
+  /* 포커스 시 테두리 색상 */
+  .custom-editor-wrapper .ck.ck-editor__editable.ck-focused {
+    @apply border-[#ccc] shadow-none;
+  }
 }
 

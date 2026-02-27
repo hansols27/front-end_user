@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import SideLayout from '@/components/layout/SideLayout';
 import { useDevice } from '@/hooks/useDevice';
 import { useState, useEffect } from "react";
@@ -9,6 +10,11 @@ import Input from '@/components/common/Input';
 import Select from '@/components/common/Select';
 import { Community_category } from '@/data/category';
 import ConfirmAlert from '@/components/common/ConfirmAlert';
+
+const CustomEditor = dynamic(() => import('@/components/common/Editor'), { 
+    ssr: false,
+    loading: () => <div className="w-full h-[480px] lg:h-[640px] bg-black-sub animate-pulse border border-white/10" /> 
+  })
 
 export default function CommunityWrite() {
   const device = useDevice();
@@ -25,6 +31,10 @@ export default function CommunityWrite() {
     title: '',
     content: ''
   });
+
+  const handleEditorChange = (data: string) => {
+    setForm(prev => ({ ...prev, content: data }));
+  };
  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -74,26 +84,24 @@ export default function CommunityWrite() {
                     />                    
                 </div> 
                 {/* 에디터 영역 */}
-                <div 
-                    id="smart-editor" 
-                    className="w-full min-h-[500px] border border-white/20 bg-black-sub text-white"
-                    >
-                    {/* 여기에 네이버 스마트 에디터가 로드됩니다 */}
-                    <textarea name="content" className="w-full h-full hidden" />
-                    <div className="p-10 text-gray-400">네이버 스마트 에디터 로드 영역</div>
+                <div className="min-h-[640px] mb-[40px] text-black">
+                    <CustomEditor 
+                        value={form.content} 
+                        onChange={handleEditorChange} 
+                    />
                 </div>
 
                     <div className="w-full h-px bg-white mt-[40px]" />
 
-                    {/* 버튼 그룹 */}
-                    <div className="flex justify-end gap-[10px] mt-[40px] mb-[40px]">
-                        <Button variant="black" size="md" className="w-[120px]" onClick={() => setIsCancelAlertOpen(true)}>
-                            취소
-                        </Button>
-                        <Button variant="black" size="md" className="w-[120px]" onClick={() => setIsSubmitAlertOpen(true)}>
-                            등록
-                        </Button>
-                    </div>
+                {/* 버튼 그룹 */}
+                <div className="flex justify-end gap-[10px] mt-[40px] mb-[40px]">
+                    <Button variant="black" size="md" className="w-[120px]" onClick={() => setIsCancelAlertOpen(true)}>
+                        취소
+                    </Button>
+                    <Button variant="black" size="md" className="w-[120px]" onClick={() => setIsSubmitAlertOpen(true)}>
+                        등록
+                    </Button>
+                </div>
             </div>                   
         </div>
 
@@ -144,8 +152,11 @@ export default function CommunityWrite() {
             />
 
             {/* 에디터 영역 */}
-            <div id="smart-editor-mo" className="w-full min-h-[400px] border border-white/20">
-               <div className="p-5 text-gray-400 text-sm text-center mt-20">에디터 모바일 영역</div>
+            <div className="min-h-[480px] mb-[40px] text-black">
+                <CustomEditor 
+                    value={form.content} 
+                    onChange={handleEditorChange} 
+                />
             </div>
 
             <div className="w-full h-px bg-white mt-[20px]" />
