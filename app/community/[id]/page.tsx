@@ -51,6 +51,10 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
     router.push('/community');
   };
 
+  const handleModify = () => {
+    router.push(`/community/modify/${id}`);
+  };
+
   /* =========================
       PC 버전
   ========================= */
@@ -84,9 +88,12 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
             <div className="w-full h-px bg-white mt-[40px]" />
 
             {/* 목록 버튼 (우측 끝, 간격: PC 40px) */}
-            <div className="flex justify-end mt-[40px] mb-[40px]">
+            <div className="flex justify-end gap-[10px] mt-[40px] mb-[40px]">
               <Button variant="black" size="md" className="w-[120px]" onClick={handleGoList}>
                 목록
+              </Button>
+              <Button variant="black" size="md" className="w-[120px]" onClick={handleModify}>
+                수정
               </Button>
             </div>
             <CommentSection device="pc" isLoggedIn={isLoggedIn} />
@@ -129,9 +136,12 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
             <div className="w-full h-px bg-white mt-[20px]" />
 
             {/* 목록 버튼 (우측 끝, 간격: MO 20px) */}
-            <div className="flex justify-end mt-[20px]">
+            <div className="flex justify-end gap-[10px] mt-[20px]">
               <Button variant="black" size="sm" className="w-[80px]" onClick={handleGoList}>
                 목록
+              </Button>
+              <Button variant="black" size="sm" className="w-[80px]" onClick={handleModify}>
+                수정
               </Button>
             </div>
           </div>
