@@ -334,11 +334,6 @@
            text-black pointer-events-none;
   }
 
-  .select-arrow {
-    @apply absolute right-[15px] top-1/2 -translate-y-1/2
-           text-black pointer-events-none;
-  }
-
   .icon-arrow {
     @apply transition-transform duration-300;
   }

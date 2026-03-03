@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant: "blue" | "black"; // 필수 속성으로 지정
+  variant: "blue" | "black" | "white"; // 필수 속성으로 지정
   size: "lg" | "md" | "sm";  // 필수 속성으로 지정
   className?: string;
 }
