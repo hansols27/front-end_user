@@ -352,6 +352,11 @@
            text-black/40 text-h5 pointer-events-none z-10;
   }
 
+  .select-arrow {
+    @apply absolute right-[15px] top-1/2 -translate-y-1/2
+           text-black pointer-events-none;
+  }
+
   /* 댓글 입력창 전용 스타일 */
   .textarea-container {
     display: flex;
