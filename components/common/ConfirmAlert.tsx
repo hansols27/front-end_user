@@ -42,8 +42,12 @@ export default function ConfirmAlert({
   return (
     <div className="alert-overlay">
       <div className={`alert-box ${sizeClass}`}>
+        {/* 타이틀 */}
+        <div className="alert-title text-h4 text-center">
+          {data.title}
+        </div>
         {/* 메시지 */}
-        <div className="alert-message text-h4 p-[25px] text-center">
+        <div className="alert-message text-h5 p-[20px] text-center">
           {data.message}
         </div>
 
